@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://cimaykirqo303"]
+
+[ext_resource type="Shader" path="res://shaders/papelito.gdshader" id="1_mnrmw"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wh6c1"]
+radius = 28.0
+height = 80.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qmbof"]
+shader = ExtResource("1_mnrmw")
+
+[sub_resource type="Gradient" id="Gradient_jt5cd"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.59434, 0.603774)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_n6lo4"]
+gradient = SubResource("Gradient_jt5cd")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Papelito" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -10)
+shape = SubResource("CapsuleShape2D_wh6c1")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
+
+[node name="Art" type="Node2D" parent="."]
+
+[node name="Body" type="Polygon2D" parent="Art"]
+polygon = PackedVector2Array(-32, -48, 32, -48, 32, 48, -32, 48)
+
+[node name="Left Eye" type="Polygon2D" parent="Art"]
+material = SubResource("ShaderMaterial_qmbof")
+position = Vector2(12, -20)
+color = Color(0, 0, 0, 1)
+texture = SubResource("GradientTexture2D_n6lo4")
+polygon = PackedVector2Array(-4, -4, -4, 4, 4, 4, 4, -4)
+uv = PackedVector2Array(4.81571, 3.32819, 4.81571, 251.328, 252.816, 251.328, 252.816, 3.32819)
+
+[node name="Right Eye" type="Polygon2D" parent="Art"]
+material = SubResource("ShaderMaterial_qmbof")
+position = Vector2(-12, -20)
+texture = SubResource("GradientTexture2D_n6lo4")
+polygon = PackedVector2Array(-4, -4, -4, 4, 4, 4, 4, -4)
+uv = PackedVector2Array(4.81609, 3.32816, 4.81609, 251.328, 252.816, 251.328, 252.816, 3.32816)

@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=4 uid="uid://b8uk1jhiq60qy"]
+
+[ext_resource type="PackedScene" uid="uid://dc3muu0h27qar" path="res://scenes/square.tscn" id="1_bivg3"]
+[ext_resource type="PackedScene" uid="uid://clw0x34g63r3k" path="res://scenes/corner.tscn" id="2_bx2j2"]
+[ext_resource type="PackedScene" uid="uid://cimaykirqo303" path="res://scenes/papelito.tscn" id="3_y3ptv"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_y0e8y"]
+scenes/1/scene = ExtResource("1_bivg3")
+scenes/2/scene = ExtResource("2_bx2j2")
+
+[sub_resource type="TileSet" id="TileSet_mpyps"]
+sources/0 = SubResource("TileSetScenesCollectionSource_y0e8y")
+
+[node name="Main" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD//wAAAAAAAAAAAQAAAAAAAAAAAAAAAQD+/wAAAAAAAAAAAQD9/wAAAAAAAAAAAQD8/wAAAAAAAAAAAQD7/wAAAAAAAAAAAQD7/wEAAAAAAAAAAQD8/wEAAAAAAAAAAQD9/wEAAAAAAAAAAQD+/wEAAAAAAAAAAQD//wEAAAAAAAAAAQAAAAEAAAAAAAAAAQABAAAAAAAAAAAAAQABAAEAAAAAAAAAAQACAAEAAAAAAAAAAQACAAAAAAAAAAAAAQACAP//AAAAAAAAAQADAAAAAAAAAAAAAQAEAAAAAAAAAAAAAQADAAEAAAAAAAAAAQAEAAEAAAAAAAAAAQADAP//AAAAAAAAAQADAP7/AAAAAAAAAgACAP7/AAAAAAAAAQABAP//AAAAAAAAAQABAP7/AAAAAAAAAQAAAP//AAAAAAAAAQD/////AAAAAAAAAQD+////AAAAAAAAAQD9////AAAAAAAAAQD6/wEAAAAAAAAAAQD6/wAAAAAAAAAAAQD5/wEAAAAAAAAAAQD5/wAAAAAAAAAAAQD4/wAAAAAAAAAAAQD4/wEAAAAAAAAAAQD3/wAAAAAAAAAAAQD3/wEAAAAAAAAAAQD3/wIAAAAAAAAAAQD2/wEAAAAAAAAAAQD4/wIAAAAAAAAAAQD5/wIAAAAAAAAAAQD6/wIAAAAAAAAAAQD7/wIAAAAAAAAAAQD8/wIAAAAAAAAAAQD9/wIAAAAAAAAAAQD+/wIAAAAAAAAAAQD//wIAAAAAAAAAAQAAAAIAAAAAAAAAAQABAAIAAAAAAAAAAQACAAIAAAAAAAAAAQD3/wMAAAAAAAAAAQD4/wMAAAAAAAAAAQD5/wMAAAAAAAAAAQD8/wMAAAAAAAAAAQD7/wMAAAAAAAAAAQD6/wMAAAAAAAAAAQA=")
+tile_set = SubResource("TileSet_mpyps")
+
+[node name="Tiles" type="Node2D" parent="."]
+
+[node name="Papelito" parent="." instance=ExtResource("3_y3ptv")]
+position = Vector2(-40, -60)

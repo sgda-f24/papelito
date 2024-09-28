@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://cimaykirqo303"]
 
 [ext_resource type="Shader" path="res://shaders/papelito.gdshader" id="1_mnrmw"]
-[ext_resource type="Script" path="res://scenes/papelito.gd" id="1_pb223"]
+[ext_resource type="Script" path="res://scripts/papelito.gd" id="1_pb223"]
 [ext_resource type="Shader" path="res://shaders/outline_papelito.gdshader" id="2_wai63"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_10o73"]

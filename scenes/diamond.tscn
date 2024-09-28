@@ -1,24 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://bt7gjbreprl6"]
+[gd_scene load_steps=5 format=3 uid="uid://bt7gjbreprl6"]
 
 [ext_resource type="Shader" path="res://shaders/fold.gdshader" id="1_64l62"]
+[ext_resource type="Script" path="res://scripts/folding_tile.gd" id="2_3j8nt"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sqs8b"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yhup3"]
 shader = ExtResource("1_64l62")
-shader_parameter/fold_amount = 0.821
+shader_parameter/fold_amount = 0.0
 shader_parameter/start_color = Color(1, 1, 1, 1)
-shader_parameter/end_color = Color(0.280548, 0.725236, 1, 1)
-shader_parameter/boundary_color = Color(0.718636, 0.593327, 0.562725, 1)
+shader_parameter/end_color = Color(0.273374, 0.490281, 1, 1)
+shader_parameter/boundary_color = Color(1, 1, 0, 1)
 shader_parameter/max_boundary_width = 0.02
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_g40x0"]
 size = Vector2(100, 100)
 
-[node name="Node2D" type="Node2D"]
-
-[node name="Polygon2D" type="Polygon2D" parent="."]
-material = SubResource("ShaderMaterial_sqs8b")
+[node name="Diamond" type="Polygon2D"]
+material = SubResource("ShaderMaterial_yhup3")
 rotation = 0.785398
+scale = Vector2(0.25, 0.25)
 texture = SubResource("PlaceholderTexture2D_g40x0")
 texture_rotation = 0.785398
-polygon = PackedVector2Array(-50, -50, 50, -50, 50, 50, -50, 50)
+polygon = PackedVector2Array(-181.019, -181.019, 181.019, -181.019, 181.019, 181.019, -181.019, 181.019)
 uv = PackedVector2Array(36.5205, 34.8969, 36.5266, -33.8978, 105.321, -33.8917, 105.315, 34.903)
+script = ExtResource("2_3j8nt")

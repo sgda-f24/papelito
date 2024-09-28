@@ -28,10 +28,10 @@ void fragment() {
     vec4 base_color;
     if (UV.y <= fold_line) {
         // Color for the "removed" area
-        base_color = vec4(mix(end_color.xyz * 0.2, end_color.xyz, smoothstep(0.3, 0.5, fold_amount)), 1.0);
+        base_color = vec4(mix(end_color.xyz * 0.5, end_color.xyz, smoothstep(0.3, 0.5, fold_amount)), 1.0);
     } else {
         // Color for the "remaining" area
-        base_color = vec4(mix(start_color.xyz, start_color.xyz * 0.2, smoothstep(0.5, 0.7, fold_amount)), 1.0);
+        base_color = vec4(mix(start_color.xyz, start_color.xyz * 0.5, smoothstep(0.5, 0.7, fold_amount)), 1.0);
     }
 	
 	float bounce = 0.5;

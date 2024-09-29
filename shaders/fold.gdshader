@@ -45,5 +45,5 @@ void fragment() {
     // Blend the boundary color with the base color
     // If within boundary_width, boundary_factor approaches 1, showing boundary_color
     // Otherwise, it shows base_color
-    COLOR = mix(base_color, final_boundary_color, boundary_factor);
+    COLOR = mix(base_color, final_boundary_color, boundary_factor)*COLOR;
 }

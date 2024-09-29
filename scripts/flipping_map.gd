@@ -1,7 +1,7 @@
 extends TileMapLayer
 # Exported variables for easy customization
 @export var tile_id: int = 1                # Tile ID for FoldingTile in TileSet
-@export var spawn_interval: float = 1.0      # Time in seconds between spawns
+@export var spawn_interval: float = 0.1      # Time in seconds between spawns
 @export var packed_scenes: TileSet
 
 # Internal tracking

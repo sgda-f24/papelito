@@ -1,6 +1,5 @@
 [gd_scene load_steps=11 format=3 uid="uid://cimaykirqo303"]
 
-[ext_resource type="Shader" path="res://shaders/papelito.gdshader" id="1_mnrmw"]
 [ext_resource type="Script" path="res://scripts/papelito.gd" id="1_pb223"]
 [ext_resource type="Shader" path="res://shaders/outline_papelito.gdshader" id="2_wai63"]
 
@@ -22,8 +21,25 @@ fill_from = Vector2(0.5, 0)
 fill_to = Vector2(0.5, 1)
 metadata/_snap_enabled = true
 
+[sub_resource type="Shader" id="Shader_l7nqs"]
+code = "shader_type canvas_item;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV);
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the CanvasItem.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qmbof"]
-shader = ExtResource("1_mnrmw")
+shader = SubResource("Shader_l7nqs")
 
 [sub_resource type="Gradient" id="Gradient_jt5cd"]
 interpolation_mode = 2
@@ -43,8 +59,6 @@ height = 274.0
 
 [node name="Papelito" type="CharacterBody2D"]
 script = ExtResource("1_pb223")
-
-[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Unfolded" type="Node2D" parent="."]
 
@@ -107,3 +121,6 @@ uv = PackedVector2Array(4.81609, 3.32816, 4.81609, 251.328, 252.816, 251.328, 25
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_wh6c1")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)

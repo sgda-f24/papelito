@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dc3muu0h27qar"]
+[gd_scene format=3 uid="uid://bbfosgo14yk4c"]
 
 [node name="Square" type="Polygon2D"]
 scale = Vector2(4, 4)

@@ -1,25 +1,16 @@
 [gd_scene load_steps=5 format=3 uid="uid://bt7gjbreprl6"]
 
-[ext_resource type="Shader" path="res://shaders/fold.gdshader" id="1_64l62"]
+[ext_resource type="Material" uid="uid://c3teh1opk6pnn" path="res://shaders/diamond.material" id="1_op2py"]
 [ext_resource type="Script" path="res://scripts/folding_tile.gd" id="2_3j8nt"]
+[ext_resource type="Texture2D" uid="uid://cit3v4hdmuji" path="res://assets/tilesets/tiles.png" id="2_wgn2d"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yhup3"]
-shader = ExtResource("1_64l62")
-shader_parameter/fold_amount = 0.0
-shader_parameter/start_color = Color(1, 1, 1, 1)
-shader_parameter/end_color = Color(0.273374, 0.490281, 1, 1)
-shader_parameter/boundary_color = Color(1, 1, 0, 1)
-shader_parameter/max_boundary_width = 0.02
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_g40x0"]
-size = Vector2(100, 100)
+[sub_resource type="AtlasTexture" id="AtlasTexture_shxf4"]
+atlas = ExtResource("2_wgn2d")
+filter_clip = true
 
 [node name="Diamond" type="Polygon2D"]
-material = SubResource("ShaderMaterial_yhup3")
-rotation = 0.785398
-scale = Vector2(0.25, 0.25)
-texture = SubResource("PlaceholderTexture2D_g40x0")
-texture_rotation = 0.785398
-polygon = PackedVector2Array(-181.019, -181.019, 181.019, -181.019, 181.019, 181.019, -181.019, 181.019)
-uv = PackedVector2Array(36.5205, 34.8969, 36.5266, -33.8978, 105.321, -33.8917, 105.315, 34.903)
+material = ExtResource("1_op2py")
+texture = SubResource("AtlasTexture_shxf4")
+polygon = PackedVector2Array(-256, 0, 0, -256, 256, 0, 0, 256)
+uv = PackedVector2Array(93.4827, 251.765, 260.745, 88.94, 423.569, 256.201, 256.307, 419.027)
 script = ExtResource("2_3j8nt")

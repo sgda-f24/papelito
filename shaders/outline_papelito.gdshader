@@ -73,4 +73,3 @@ void fragment() {
         COLOR.a += (1.0 - COLOR.a) * color.a;
     }
 }
-

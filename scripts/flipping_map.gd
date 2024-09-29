@@ -1,12 +1,8 @@
-# Flips.gd
-extends Node2D
-
-@onready var visuals_map = $"../Visuals"
-@onready var flips_map = $"."
-
+extends TileMapLayer
 # Exported variables for easy customization
 @export var tile_id: int = 1                # Tile ID for FoldingTile in TileSet
 @export var spawn_interval: float = 1.0      # Time in seconds between spawns
+@export var packed_scenes: TileSet
 
 # Internal tracking
 @onready var spawn_timer: Timer = Timer.new()
@@ -29,22 +25,22 @@ func _on_SpawnTimer_timeout():
 	if random_cell == null:
 		return
 	
-	if (active_folding_tiles.any(func(x): x.position == visuals_map.map_to_local(random_cell))):
+	if (active_folding_tiles.any(func(x): x.position == self.map_to_local(random_cell))):
 		_on_SpawnTimer_timeout()
 
 	# Place a FoldingTile on the Flips map at the same cell position
-	var scene_source = flips_map.tile_set.get_source(0)
-	var scene = scene_source.get_scene_tile_scene(1)
+	var scenes = packed_scenes.get_source(0)
+	var scene = scenes.get_scene_tile_scene(1)
 	var folding_tile = scene.instantiate()
 	self.add_child(folding_tile)
-	folding_tile.position = visuals_map.map_to_local(random_cell) as Vector2i
+	folding_tile.position = self.map_to_local(random_cell) as Vector2i
 
 	# Add the FoldingTile to the active_folding_tiles array
 	active_folding_tiles.append(folding_tile)
 
 func get_random_cell_from_visuals() -> Vector2i:
 	# Get all used cells from the Visuals map
-	var used_cells = visuals_map.get_used_cells()
+	var used_cells = self.get_used_cells()
 	if used_cells.is_empty():
 		return Vector2i(1000, 1000)
 	

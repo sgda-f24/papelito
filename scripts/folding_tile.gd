@@ -1,82 +1,101 @@
+# FoldingTile.gd
 extends Polygon2D
 class_name FoldingTile
 
-# Exported variables
-@export var fold_duration = 1.0    # Time in seconds for the folding effect to complete
-@export var unfold_delay = 3.0     # Time in seconds to wait before automatically unfolding
+# Exported variables for easy customization
+@export var fold_duration: float = 1.0    # Time in seconds to complete folding
+@export var unfold_delay: float = 3.0     # Time in seconds before auto-unfolding
+@export var is_folding: bool = true      # Set flag for initiate folding
 
-# Internal state variables
-@export var is_folding = false
-var is_unfolding = false
-var fold_start_time = 0.0
+@onready var material_ref: ShaderMaterial = load("res://shaders/diamond.material")
 
-# References to nodes
-@onready var unfold_timer = Timer.new()
+# References to timers
+var fold_timer: Timer
+var unfold_timer: Timer
+
+# State tracking
+var current_fold_amount: float = 0.0      # Current fold progress (0.0 to 1.0)
+var is_unfolding_flag: bool = false       # Indicates if unfolding is in progress
 
 func _ready():
-	# Attach the unfold_timer node to the tile
-	add_child(unfold_timer)
-	unfold_timer.one_shot = true
+	# Initialize fold_timer
+	fold_timer = Timer.new()
+	fold_timer.wait_time = fold_duration
+	fold_timer.one_shot = true
+	fold_timer.connect("timeout", _on_fold_timer_timeout)
+	add_child(fold_timer)
+	
+	# Initialize unfold_timer
+	unfold_timer = Timer.new()
 	unfold_timer.wait_time = unfold_delay
-	unfold_timer.connect("timeout", _on_Timer_timeout)
-
+	unfold_timer.one_shot = true
+	unfold_timer.connect("timeout", _on_unfold_timer_timeout)
+	add_child(unfold_timer)
+	
 	# Ensure a unique ShaderMaterial instance
 	if self.material and self.material is ShaderMaterial:
 		self.material = self.material.duplicate()
-
-	# Set initial folded state if start_folded is true
+	
+	# Set initial fold_amount in shader
 	set_fold_amount(0.0)
-	fold_start_time = Time.get_ticks_msec() / 1000.0  # Capture the start time in seconds
+	
+	# If is_folding is already true, start folding
 	if is_folding:
-		unfold_timer.start()
+		start_folding()
 
-func set_folding_state(folding: bool):
-	is_folding = folding
-	fold_start_time = Time.get_ticks_msec() / 1000.0  # Capture the start time in seconds
+func set_folding(state: bool):
+	if state and not is_folding:
+		start_folding()
+	elif not state and is_folding:
+		stop_folding()
 
+func start_folding():
+	is_folding = true
+	is_unfolding_flag = false
+	fold_timer.start()
+
+func stop_folding():
 	if is_folding:
-		# Start the unfolding countdown
-		unfold_timer.start()
-	else:
-		unfold_timer.stop()  # Stop the unfold_timer if folding state is set to false
+		is_folding = false
+		fold_timer.stop()
+		# Optionally, reset fold_amount or perform other actions
+		set_fold_amount(0.0)
 
-	# Print debug info
-
-func fold():
-	set_folding_state(true)
-
-func _process(delta):
-	if is_folding:
-		# Calculate the elapsed time since folding started
-
-		var elapsed_time = (Time.get_ticks_msec() / 1000.0) - fold_start_time
-		var fold_amount = min(1.0, elapsed_time / fold_duration)
-		set_fold_amount(fold_amount)
-
-		# Check if fully folded
-		if fold_amount >= 1.0:
-			is_folding = false
-	elif is_unfolding:
-		# Calculate the elapsed time since unfolding started
-
-		var elapsed_time = (Time.get_ticks_msec() / 1000.0) - fold_start_time
-		var fold_amount = 1.0 - min(1.0, elapsed_time / fold_duration)
-		set_fold_amount(fold_amount)
-
-		# Check if fully unfolded
-		if fold_amount <= 0.0:
-			is_unfolding = false
-		
-
-func _on_Timer_timeout():
-	unfold_tile()
-
-func unfold_tile():
-	# Start the unfolding process
+func _on_fold_timer_timeout():
+	# Folding complete, start unfold_timer
 	is_folding = false
-	is_unfolding = true
-	fold_start_time = Time.get_ticks_msec() / 1000.0  # Capture the start time
+	is_unfolding_flag = true
+	unfold_timer.start()
+
+func _on_unfold_timer_timeout():
+	# Start unfolding
+	start_unfolding()
+
+func start_unfolding():
+	if is_unfolding_flag:
+		# Start the unfolding process
+		fold_timer.wait_time = fold_duration  # Reuse fold_timer for unfolding
+		fold_timer.disconnect("timeout", _on_fold_timer_timeout)  # Prevent duplicate connections
+		fold_timer.connect("timeout", _on_unfold_complete)
+		fold_timer.start()
+
+func _on_unfold_complete():
+	# Unfolding complete, reset fold_timer and destroy the tile
+	set_fold_amount(0.0)
+	queue_free()
+
+func _process(delta: float):
+	if is_folding and fold_timer.time_left > 0:
+		# Calculate fold_amount based on remaining time
+		current_fold_amount = 1.0 - (fold_timer.time_left / fold_duration)
+		set_fold_amount(current_fold_amount)
+	elif is_unfolding_flag and fold_timer.time_left > 0:
+		# Calculate unfold_amount based on remaining time
+		current_fold_amount = (fold_timer.time_left / fold_duration)
+		set_fold_amount(current_fold_amount)
 
 func set_fold_amount(amount: float):
-	if self and self.material and self.material is ShaderMaterial:
-		self.material.set_shader_parameter("fold_amount", clamp(amount, 0.0, 1.0))
+	# Clamp the fold_amount between 0.0 and 1.0
+	var clamped_amount = clamp(amount, 0.0, 1.0)
+	if self.material and self.material is ShaderMaterial:
+		self.material.set_shader_parameter("fold_amount", clamped_amount)

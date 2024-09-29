@@ -1,0 +1,13 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dbb4p8gjokgo3"]
+
+[ext_resource type="PackedScene" uid="uid://bt7gjbreprl6" path="res://scenes/diamond.tscn" id="1_70uhn"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_tyvdt"]
+scenes/1/scene = ExtResource("1_70uhn")
+scenes/1/display_placeholder = ExtResource("1_70uhn")
+
+[resource]
+tile_shape = 1
+tile_size = Vector2i(512, 512)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetScenesCollectionSource_tyvdt")

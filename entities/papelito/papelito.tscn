@@ -1,0 +1,33 @@
+[gd_scene load_steps=8 format=3 uid="uid://cimaykirqo303"]
+
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_b6q42"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="3_t2xkn"]
+[ext_resource type="PackedScene" uid="uid://bt4m5glv63l8p" path="res://entities/papelito/unfolded/unfolded_papelito.tscn" id="4_n7ys7"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="4_yfr22"]
+[ext_resource type="Script" path="res://entities/papelito/unfolded/unfolded_papelito.gd" id="5_b1un2"]
+[ext_resource type="PackedScene" uid="uid://2j04mlky382n" path="res://entities/papelito/mouse/mouse_papelito.tscn" id="5_ue8q7"]
+[ext_resource type="Script" path="res://entities/papelito/mouse/mouse_papelito.gd" id="7_adest"]
+
+[node name="Papelito" type="Node2D"]
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("2_b6q42")
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("3_t2xkn")
+initial_state = NodePath("Unfolded")
+
+[node name="Unfolded" type="Node" parent="StateChart/Root"]
+script = ExtResource("4_yfr22")
+
+[node name="Unfolded" parent="StateChart/Root/Unfolded" instance=ExtResource("4_n7ys7")]
+script = ExtResource("5_b1un2")
+
+[node name="Mouse" type="Node" parent="StateChart/Root"]
+script = ExtResource("4_yfr22")
+
+[node name="Mouse" parent="StateChart/Root/Mouse" instance=ExtResource("5_ue8q7")]
+script = ExtResource("7_adest")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)

@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=3 uid="uid://2j04mlky382n"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0w34v"]
+radius = 32.0
+height = 64.0
+
+[node name="Mouse" type="CharacterBody2D"]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_0w34v")
+
+[node name="Art" type="Node2D" parent="."]
+
+[node name="Body" type="Polygon2D" parent="Art"]
+polygon = PackedVector2Array(-32, 16, -16, 32, 0, 16, 16, 32, 32, 16, 48, 16, 64, 16, 32, -16, -32, -16, -64, 16)
+
+[node name="Eye" type="Polygon2D" parent="Art"]
+position = Vector2(24, 0)
+scale = Vector2(0.5, 0.4375)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(48, 0, 64, 0, 48, -16)
+
+[node name="Tail" type="Line2D" parent="Art"]
+points = PackedVector2Array(-32, 0, -64, 0, -97, 25, -129, 21)

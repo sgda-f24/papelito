@@ -17,6 +17,7 @@ filter_clip = true
 
 [node name="Diamond" type="Polygon2D"]
 material = SubResource("ShaderMaterial_yhup3")
+rotation = 3.14159
 texture = SubResource("AtlasTexture_shxf4")
 polygon = PackedVector2Array(-256, 0, 0, -256, 256, 0, 0, 256)
 uv = PackedVector2Array(93.4827, 251.765, 260.745, 88.94, 423.569, 256.201, 256.307, 419.027)

@@ -7,8 +7,6 @@ class_name FoldingTile
 @export var unfold_delay: float = 3.0     # Time in seconds before auto-unfolding
 @export var is_folding: bool = true      # Set flag for initiate folding
 
-@onready var material_ref: ShaderMaterial = load("res://shaders/diamond.material")
-
 # References to timers
 var fold_timer: Timer
 var unfold_timer: Timer

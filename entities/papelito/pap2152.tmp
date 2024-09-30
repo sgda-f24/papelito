@@ -47,6 +47,9 @@ script = ExtResource("5_b1un2")
 [node name="Mouse" parent="." instance=ExtResource("5_ue8q7")]
 unique_name_in_owner = true
 script = ExtResource("7_adest")
+walk_length = null
+speed = null
+jump = null
 
 [connection signal="state_input" from="StateChart/Root" to="StateChart/Root/StateManager" method="_on_root_state_input"]
 [connection signal="state_entered" from="StateChart/Root/Unfolded" to="Unfolded" method="_on_unfolded_state_entered"]

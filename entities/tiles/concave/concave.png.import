@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://x7majcf1dcmx"
-path="res://.godot/imported/tiles.png-1d935e2d1133f6386f6125754907c3d7.ctex"
+uid="uid://d160bfkb5qhk3"
+path="res://.godot/imported/concave.png-d9980d4228ccae4e21cc55610f70e9c6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/tiles/tiles.png"
-dest_files=["res://.godot/imported/tiles.png-1d935e2d1133f6386f6125754907c3d7.ctex"]
+source_file="res://entities/tiles/concave/concave.png"
+dest_files=["res://.godot/imported/concave.png-d9980d4228ccae4e21cc55610f70e9c6.ctex"]
 
 [params]
 

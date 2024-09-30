@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://df6q4o2jl8jbn"]
+
+[ext_resource type="Material" uid="uid://hir00ykb5ddc" path="res://entities/tiles/folding_tile.material" id="1_n0o3a"]
+[ext_resource type="Texture2D" uid="uid://d160bfkb5qhk3" path="res://entities/tiles/concave/concave.png" id="1_rx6lt"]
+[ext_resource type="Script" path="res://entities/tiles/folding_tile.gd" id="3_ii6hl"]
+
+[node name="Concave" type="Polygon2D"]
+material = ExtResource("1_n0o3a")
+scale = Vector2(-1, 1)
+texture = ExtResource("1_rx6lt")
+polygon = PackedVector2Array(0, -256, -256, -256, -256, 256, 256, 256, 256, 0, 0, 0)
+uv = PackedVector2Array(244.364, 9.76674, 12.3637, 9.76674, 12.6132, 257.767, 12.6131, 505.767, 244.613, 505.767, 244.613, 257.767)
+script = ExtResource("3_ii6hl")

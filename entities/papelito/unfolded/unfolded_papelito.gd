@@ -1,7 +1,8 @@
-extends CharacterBody2D
+# class for unfolded form of papelito
+extends Possess
 
-
-@export var walk_length = 0.05
+@export var walk_frequency = 0.05
+@export var walk_amplitude = 0.1
 @export var speed = 300.0
 @export var jump = -400.0
 
@@ -9,15 +10,19 @@ var distance_travelled = 0
 var prev_direction = 1;
 var prev_velocity = Vector2()
 
+func _ready() -> void:
+	super._ready()
+	
+	safe_margin = 0.04
 
 func _physics_process(delta: float) -> void:
-
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if did_input("jump") and is_on_floor():
+		print("jumping")
 		velocity.y = jump
 
 	# Get the input direction and handle the movement/deceleration.
@@ -29,7 +34,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, speed)
 
 	# Skew character periodically to simulate walking.
-	if velocity and is_on_floor():
+	if velocity:
 		if direction != prev_direction or prev_velocity != velocity:
 			distance_travelled = 0
 			skew = 0
@@ -37,10 +42,17 @@ func _physics_process(delta: float) -> void:
 		prev_direction = direction
 		prev_velocity = velocity
 		distance_travelled += velocity.length() * delta
-		skew = sin(distance_travelled*direction * walk_length) * 0.05
+		skew = sin(distance_travelled*direction * walk_frequency) * walk_amplitude 
 		rotation = -skew
 	else:
 		skew = 0
 		rotation = 0
 
 	move_and_slide()
+
+func _on_unfolded_state_entered() -> void:
+	possess()
+	
+
+func _on_unfolded_state_exited() -> void:
+	un_possess()

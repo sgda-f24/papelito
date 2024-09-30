@@ -82,7 +82,7 @@ func _on_unfold_complete():
 	set_fold_amount(0.0)
 	queue_free()
 
-func _process(delta: float):
+func _process(_delta: float):
 	if is_folding and fold_timer.time_left > 0:
 		# Calculate fold_amount based on remaining time
 		current_fold_amount = 1.0 - (fold_timer.time_left / fold_duration)

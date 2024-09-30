@@ -1,6 +1,4 @@
-[gd_scene load_steps=2 format=4 uid="uid://cgitx2382sch8"]
-
-[ext_resource type="PackedScene" uid="uid://b3l0i2y1tvj7b" path="res://levels/flipping_map.tscn" id="1_lgkri"]
+[gd_scene format=3 uid="uid://cgitx2382sch8"]
 
 [node name="GUI" type="CanvasLayer"]
 
@@ -19,12 +17,6 @@ offset_left = 64.0
 offset_top = 64.0
 offset_right = 64.0
 offset_bottom = 64.0
-
-[node name="FlippingMap" parent="Camera/LeftTop/MainPanel" instance=ExtResource("1_lgkri")]
-visible = false
-modulate = Color(1, 1, 1, 0.188235)
-scale = Vector2(0.1, 0.1)
-tile_map_data = PackedByteArray("AAAAAAEABAAAAAAAAAAAAAIABAABAAAAAgAAAAMABAAAAAAAAAABAAEABAAAAAAAAAABAAIABAAAAAAAAAABAAMABAAAAAAAAAACAAIABAAAAAAAAAACAAMABAAAAAAAAAACAAQABAAAAAAAAAACAAUABAAAAAAAAAADAAIABAAAAAAAAAADAAMABAAAAAAAAAADAAQABAAAAAAAAAADAAUABAAAAAAAAAABAAQABAAAAAAAAAAAAAQABAABAAAAAgAAAAUABAAAAAAAAAABAAUABAAAAAAAAAABAAYABAABAAAAAQADAAEABAAAAAAAAAACAAEABAAAAAAAAAADAAYABAABAAAAAQACAAYABAABAAAAAQAAAAYABAABAAAAAQAAAAAABAABAAAAAAABAAAABAABAAAAAAACAAAABAABAAAAAAADAAAABAABAAAAAAAEAAAABAABAAAAAwAEAAIABAABAAAAAwAEAAQABAABAAAAAwAEAAYABAABAAAAAQA=")
 
 [node name="InnerPanel" type="Control" parent="Camera/LeftTop/MainPanel"]
 anchors_preset = 0

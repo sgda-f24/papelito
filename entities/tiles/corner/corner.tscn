@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://b43jmsyw2vvgy"]
+
+[ext_resource type="Material" uid="uid://hir00ykb5ddc" path="res://entities/tiles/folding_tile.material" id="1_pp57s"]
+[ext_resource type="Texture2D" uid="uid://bcpunhpu5huly" path="res://entities/tiles/corner/corner.png" id="2_snyit"]
+[ext_resource type="Script" path="res://entities/tiles/folding_tile.gd" id="3_aapdh"]
+
+[node name="Corner" type="Polygon2D"]
+material = ExtResource("1_pp57s")
+texture = ExtResource("2_snyit")
+polygon = PackedVector2Array(0, 256, 256, 0, -256, 0)
+uv = PackedVector2Array(260.056, 491.015, 435.734, 258.883, 71.2619, 258.458)
+script = ExtResource("3_aapdh")

@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bt7gjbreprl6"]
+
+[ext_resource type="Material" uid="uid://hir00ykb5ddc" path="res://entities/tiles/folding_tile.material" id="1_gjxle"]
+[ext_resource type="Script" path="res://entities/tiles/folding_tile.gd" id="2_3j8nt"]
+[ext_resource type="Texture2D" uid="uid://cfypnsygowaax" path="res://entities/tiles/diamond/diamond.png" id="2_t7120"]
+
+[node name="Diamond" type="Polygon2D"]
+material = ExtResource("1_gjxle")
+rotation = 3.14159
+texture = ExtResource("2_t7120")
+polygon = PackedVector2Array(-256, 0, 0, -256, 256, 0, 0, 256)
+uv = PackedVector2Array(93.4827, 251.765, 260.745, 88.94, 423.569, 256.201, 256.307, 419.027)
+script = ExtResource("2_3j8nt")

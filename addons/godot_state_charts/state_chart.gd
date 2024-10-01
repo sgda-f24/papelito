@@ -1,7 +1,7 @@
 @icon("state_chart.svg")
 @tool
 ## This is statechart. It contains a root state (commonly a compound or parallel state) and is the entry point for 
-## the state machine.
+## the state machine.+
 class_name StateChart 
 extends Node
 

@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://2j04mlky382n"]
+[gd_scene load_steps=3 format=3 uid="uid://2j04mlky382n"]
+
+[ext_resource type="Script" path="res://entities/papelito/mouse/mouse_papelito.gd" id="1_l3in3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0w34v"]
 radius = 32.0
@@ -6,11 +8,13 @@ height = 64.0
 
 [node name="Mouse" type="CharacterBody2D"]
 collision_layer = 2
+script = ExtResource("1_l3in3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_0w34v")
 
 [node name="Art" type="Node2D" parent="."]
+unique_name_in_owner = true
 
 [node name="Body" type="Polygon2D" parent="Art"]
 polygon = PackedVector2Array(-32, 16, -16, 32, 0, 16, 16, 32, 32, 16, 48, 16, 64, 16, 32, -16, -32, -16, -64, 16)

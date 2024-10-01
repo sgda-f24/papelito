@@ -19,8 +19,11 @@ func coyote(entry) -> bool:
 	return current_time - entry.timestamp <= BUFFER_TIME
 
 func handle_state_transitions():
-	pass
-
+	if input_buffer.any(func(entry): return entry.input.is_action("to_mouse")):
+		%StateChart.send_event("to_mouse")
+	if input_buffer.any(func(entry): return entry.input.is_action("to_unfold")):
+		%StateChart.send_event("to_unfold")
+	
 func _process(_delta: float) -> void:
 	var current_time = Time.get_ticks_msec()
 	self.input_buffer = input_buffer.filter(

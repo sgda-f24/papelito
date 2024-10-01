@@ -22,7 +22,6 @@ func _physics_process(delta: float) -> void:
 
 	# Handle jump.
 	if did_input("jump") and is_on_floor():
-		print("jumping")
 		velocity.y = jump
 
 	# Get the input direction and handle the movement/deceleration.
@@ -37,16 +36,16 @@ func _physics_process(delta: float) -> void:
 	if velocity:
 		if direction != prev_direction or prev_velocity != velocity:
 			distance_travelled = 0
-			skew = 0
-			rotation = 0
+			%Art.skew = 0
+			%Art.rotation = 0
 		prev_direction = direction
 		prev_velocity = velocity
 		distance_travelled += velocity.length() * delta
-		skew = sin(distance_travelled*direction * walk_frequency) * walk_amplitude 
-		rotation = -skew
+		%Art.skew = sin(distance_travelled*direction * walk_frequency) * walk_amplitude 
+		%Art.rotation = -skew
 	else:
-		skew = 0
-		rotation = 0
+		%Art.skew = 0
+		%Art.rotation = 0
 
 	move_and_slide()
 

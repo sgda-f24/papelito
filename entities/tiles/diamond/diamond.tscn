@@ -9,5 +9,5 @@ material = ExtResource("1_gjxle")
 rotation = 3.14159
 texture = ExtResource("2_t7120")
 polygon = PackedVector2Array(-256, 0, 0, -256, 256, 0, 0, 256)
-uv = PackedVector2Array(93.4827, 251.765, 260.745, 88.94, 423.569, 256.201, 256.307, 419.027)
+uv = PackedVector2Array(256.512, 11.7021, 500.807, 251.971, 260.54, 496.264, 16.2441, 255.996)
 script = ExtResource("2_3j8nt")

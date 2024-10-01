@@ -1,14 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://cimaykirqo303"]
+[gd_scene load_steps=8 format=3 uid="uid://cimaykirqo303"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_b6q42"]
 [ext_resource type="Script" path="res://entities/papelito/state_manager.gd" id="3_nps4l"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="3_t2xkn"]
 [ext_resource type="PackedScene" uid="uid://bt4m5glv63l8p" path="res://entities/papelito/unfolded/unfolded_papelito.tscn" id="4_n7ys7"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="4_yfr22"]
-[ext_resource type="Script" path="res://entities/papelito/unfolded/unfolded_papelito.gd" id="5_b1un2"]
 [ext_resource type="PackedScene" uid="uid://2j04mlky382n" path="res://entities/papelito/mouse/mouse_papelito.tscn" id="5_ue8q7"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_eytkx"]
-[ext_resource type="Script" path="res://entities/papelito/mouse/mouse_papelito.gd" id="7_adest"]
 
 [node name="Papelito" type="Node2D"]
 
@@ -30,23 +28,31 @@ script = ExtResource("4_yfr22")
 [node name="Transition" type="Node" parent="StateChart/Root/Unfolded"]
 script = ExtResource("6_eytkx")
 to = NodePath("../../Mouse")
-event = &"f_pressed"
+event = &"to_mouse"
 delay_in_seconds = "0.0"
 
 [node name="Mouse" type="Node" parent="StateChart/Root"]
 script = ExtResource("4_yfr22")
 
+[node name="Transition" type="Node" parent="StateChart/Root/Mouse"]
+script = ExtResource("6_eytkx")
+to = NodePath("../../Unfolded")
+event = &"to_unfold"
+delay_in_seconds = "0.0"
+
 [node name="PapelitoCam" type="Camera2D" parent="."]
 unique_name_in_owner = true
+ignore_rotation = false
 zoom = Vector2(0.5, 0.5)
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+rotation_smoothing_speed = 0.001
 
 [node name="Unfolded" parent="." instance=ExtResource("4_n7ys7")]
 unique_name_in_owner = true
-script = ExtResource("5_b1un2")
 
 [node name="Mouse" parent="." instance=ExtResource("5_ue8q7")]
 unique_name_in_owner = true
-script = ExtResource("7_adest")
 
 [connection signal="state_input" from="StateChart/Root" to="StateChart/Root/StateManager" method="_on_root_state_input"]
 [connection signal="state_entered" from="StateChart/Root/Unfolded" to="Unfolded" method="_on_unfolded_state_entered"]

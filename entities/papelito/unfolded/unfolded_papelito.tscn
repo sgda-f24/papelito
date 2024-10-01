@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://bt4m5glv63l8p"]
+[gd_scene load_steps=12 format=3 uid="uid://bt4m5glv63l8p"]
 
-[ext_resource type="Texture2D" uid="uid://befmmw5u5cnj" path="res://entities/tiles/paper_texture.tres" id="2_853jp"]
+[ext_resource type="Script" path="res://entities/papelito/unfolded/unfolded_papelito.gd" id="1_vycwu"]
 [ext_resource type="Shader" path="res://entities/papelito/unfolded/wind.gdshader" id="2_bvyih"]
 [ext_resource type="Shader" path="res://entities/papelito/unfolded/eye_wind.gdshader" id="3_k88af"]
 
@@ -31,8 +31,10 @@ height = 256.0
 
 [node name="Unfolded" type="CharacterBody2D"]
 collision_layer = 2
+script = ExtResource("1_vycwu")
 
-[node name="Art" type="Node2D" parent="."]
+[node name="Art" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 
 [node name="Body" type="Polygon2D" parent="Art"]
 material = SubResource("ShaderMaterial_1n213")

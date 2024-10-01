@@ -17,25 +17,13 @@ func _physics_process(delta: float) -> void:
 	if collision:
 		gravity_velocity = 0
 		
-		up_vector = collision.get_normal()
-		up_vector = filter_almost_zero(up_vector)
-		if not last_up_vector and  up_vector.is_equal_approx(Vector2.RIGHT):
-			print("Change Frame of Reference")
-			right_vector = -right_vector
-			%Art.scale.y = -1
-		else:
-			%Art.scale.y = 1
-			
-		last_up_vector = up_vector
-		jump_velocity = Vector2.ZERO
-		right_vector = -up_vector.orthogonal()
-		var angle = right_vector.angle()
-		%Art.global_rotation = right_vector.angle()
+		if not is_ghost_collision(up_vector, collision.get_normal()):
+			update_frame_of_reference(collision.get_normal())
 		
 		if did_input("jump"):
-			jump_velocity += up_vector*jump
+			jump_velocity += up_vector * jump
 			
-		jump_velocity.x = jump_velocity.x*0.95
+		jump_velocity *= 0.95
 	else:
 		last_up_vector = Vector2.ZERO
 
@@ -64,17 +52,26 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 
-func filter_almost_zero(vec, round = 0.01):
-	if abs(vec.x) < round:
-		vec.x = 0
-	if abs(vec.y) < round:
-		vec.y = 0
-	return vec
-
-func inverse_lerp(a, b, t):
-	t = min(max((t-a)/(t-b), 0), 	1)
-	return t * t * (3 - 2*t)
+func update_frame_of_reference(collision_normal):
+	print("Changing Frame of Reference to: ", collision_normal)
+	up_vector = collision_normal
+	right_vector = -up_vector.orthogonal()
+	%Art.global_rotation = right_vector.angle()
 	
+	var was_on_air = last_up_vector.is_equal_approx(Vector2.ZERO)
+	var left_wall = up_vector.is_equal_approx(Vector2.RIGHT)
+	if was_on_air and left_wall:
+		right_vector = -right_vector
+		%Art.scale.y = -1
+	else:
+		%Art.scale.y = 1
+		
+	last_up_vector = up_vector
+	jump_velocity = Vector2.ZERO
+
+func is_ghost_collision(vec, maybe_ghost):
+	return vec.is_equal_approx(maybe_ghost)
+
 func _on_mouse_state_entered() -> void:
 	possess()
 

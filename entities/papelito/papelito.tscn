@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cimaykirqo303"]
+[gd_scene load_steps=12 format=3 uid="uid://cimaykirqo303"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_b6q42"]
 [ext_resource type="Script" path="res://entities/papelito/state_manager.gd" id="3_nps4l"]
@@ -7,6 +7,16 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="4_yfr22"]
 [ext_resource type="PackedScene" uid="uid://2j04mlky382n" path="res://entities/papelito/mouse/mouse_papelito.tscn" id="5_ue8q7"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_eytkx"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="6_na5v8"]
+[ext_resource type="PackedScene" uid="uid://pfcfrt16abmg" path="res://entities/papelito/folding_transition.tscn" id="9_u5f4m"]
+
+[sub_resource type="Resource" id="Resource_lnobj"]
+script = ExtResource("6_na5v8")
+expression = "on_floor"
+
+[sub_resource type="Resource" id="Resource_jalhw"]
+script = ExtResource("6_na5v8")
+expression = "on_floor"
 
 [node name="Papelito" type="Node2D"]
 
@@ -29,7 +39,8 @@ script = ExtResource("4_yfr22")
 script = ExtResource("6_eytkx")
 to = NodePath("../../Mouse")
 event = &"to_mouse"
-delay_in_seconds = "0.0"
+guard = SubResource("Resource_lnobj")
+delay_in_seconds = "3.0"
 
 [node name="Mouse" type="Node" parent="StateChart/Root"]
 script = ExtResource("4_yfr22")
@@ -38,6 +49,7 @@ script = ExtResource("4_yfr22")
 script = ExtResource("6_eytkx")
 to = NodePath("../../Unfolded")
 event = &"to_unfold"
+guard = SubResource("Resource_jalhw")
 delay_in_seconds = "0.0"
 
 [node name="PapelitoCam" type="Camera2D" parent="."]
@@ -53,9 +65,13 @@ unique_name_in_owner = true
 
 [node name="Mouse" parent="." instance=ExtResource("5_ue8q7")]
 unique_name_in_owner = true
+position = Vector2(0, 95)
+
+[node name="FoldingTransition" parent="." instance=ExtResource("9_u5f4m")]
 
 [connection signal="state_input" from="StateChart/Root" to="StateChart/Root/StateManager" method="_on_root_state_input"]
 [connection signal="state_entered" from="StateChart/Root/Unfolded" to="Unfolded" method="_on_unfolded_state_entered"]
 [connection signal="state_exited" from="StateChart/Root/Unfolded" to="Unfolded" method="_on_unfolded_state_exited"]
+[connection signal="transition_pending" from="StateChart/Root/Unfolded" to="Unfolded" method="_on_unfolded_transition_pending"]
 [connection signal="state_entered" from="StateChart/Root/Mouse" to="Mouse" method="_on_mouse_state_entered"]
 [connection signal="state_exited" from="StateChart/Root/Mouse" to="Mouse" method="_on_mouse_state_exited"]

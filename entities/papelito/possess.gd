@@ -4,12 +4,20 @@ class_name Possess
 
 # Reference to the StateManager
 @onready var state_manager: StateManager = %StateManager
+@onready var state_chart: StateChart = %StateChart
+
+var on_floor = true
 
 func _ready():
 	un_possess()
+	state_chart.set_expression_property("on_floor", on_floor)
 
 func _process(_delta: float) -> void:
 	%PapelitoCam.global_rotation = 0
+
+func _physics_process(delta: float) -> void:
+	on_floor = is_on_floor()
+	state_chart.set_expression_property("on_floor", on_floor)
 
 func possess():
 	visible = true

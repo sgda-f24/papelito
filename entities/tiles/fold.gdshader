@@ -23,18 +23,19 @@ void fragment() {
     // Using smoothstep for smooth transitions
     float boundary_factor = smoothstep(boundary_width, 0.0, dist);
 	
-    
+    float bounce = 0.5;
+	
     // Initialize base color based on fold position
     vec4 base_color;
     if (UV.y <= fold_line) {
         // Color for the "removed" area
-        base_color = vec4(mix(end_color.xyz * 0.5, end_color.xyz, smoothstep(0.3, 0.5, fold_amount)), 1.0);
+        base_color = vec4(mix(end_color.xyz * bounce, end_color.xyz, smoothstep(0.3, 0.5, fold_amount)), 1.0);
     } else {
         // Color for the "remaining" area
-        base_color = vec4(mix(start_color.xyz, start_color.xyz * 0.5, smoothstep(0.5, 0.7, fold_amount)), 1.0);
+        base_color = vec4(mix(start_color.xyz, start_color.xyz * bounce, smoothstep(0.5, 0.7, fold_amount)), 1.0);
     }
 	
-	float bounce = 0.5;
+	
 	// Calculate the brightness factor based on the x-coordinate
     // This makes the boundary brighter near x=0.5 and darker near x=0 and x=1
     float brightness_factor = bounce + (1.0-bounce)* exp(-64.0*(UV.x -0.5)*(UV.x-0.5));

@@ -67,27 +67,27 @@ expanded_output_ports = [0]
 texture = SubResource("NoiseTexture2D_j8jhc")
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_phog3"]
-size = Vector2(244, 252)
+size = Vector2(244, 118)
 title = "Boundary Factor"
 attached_nodes = PackedInt32Array(19)
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_iq05v"]
-size = Vector2(1024, 555)
+size = Vector2(1024, 318)
 title = "Boundary Width"
 attached_nodes = PackedInt32Array(15, 14, 33, 12)
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_taupq"]
-size = Vector2(248, 252)
+size = Vector2(244, 118)
 title = "Fold Line"
 attached_nodes = PackedInt32Array(13)
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_quw1f"]
-size = Vector2(424, 221)
+size = Vector2(424, 178)
 title = "Distance"
 attached_nodes = PackedInt32Array(18, 16)
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_0uqh0"]
-size = Vector2(1574, 935)
+size = Vector2(1564, 798)
 title = "Base Color"
 attached_nodes = PackedInt32Array(27, 28, 49, 46, 32, 42, 38, 37, 36, 39, 47, 41, 40)
 
@@ -102,7 +102,7 @@ default_input_values = [0, 0.0, 1, 0.0, 2, 0.0, 3, 1.0]
 linked_parent_graph_frame = 26
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_yc1jo"]
-size = Vector2(272, 314)
+size = Vector2(244, 118)
 title = "Start Color"
 attached_nodes = PackedInt32Array(7)
 
@@ -135,18 +135,18 @@ default_input_values = [0, 0.5, 1, 0.7, 2, 0.5]
 linked_parent_graph_frame = 26
 
 [sub_resource type="VisualShaderNodeVectorCompose" id="VisualShaderNodeVectorCompose_08i28"]
-default_input_values = [0, 0.0, 1, 0.0, 2, 0.0, 3, 1.0]
+default_input_values = [0, 0.0, 1, 0.0, 2, 0.0, 3, 0.0]
 linked_parent_graph_frame = 26
 op_type = 2
 
 [sub_resource type="VisualShaderNodeVectorCompose" id="VisualShaderNodeVectorCompose_gkjg7"]
-default_input_values = [0, 0.0, 1, 0.0, 2, 0.0, 3, 1.0]
+default_input_values = [0, 0.0, 1, 0.0, 2, 0.0, 3, 0.0]
 linked_parent_graph_frame = 26
 op_type = 2
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_yl1ny"]
 linked_parent_graph_frame = 26
-size = Vector2(572, 460)
+size = Vector2(420, 460)
 title = "Shadow"
 attached_nodes = PackedInt32Array(59, 60)
 
@@ -170,7 +170,7 @@ constant = 0.5
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_lsgpl"]
 linked_parent_graph_frame = 53
-size = Vector2(244, 158)
+size = Vector2(244, 118)
 title = "Bounce Light"
 attached_nodes = PackedInt32Array(50)
 
@@ -185,7 +185,7 @@ title = "Brightness Factor"
 attached_nodes = PackedInt32Array(52, 51)
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_3lnef"]
-size = Vector2(1404, 408)
+size = Vector2(1404, 360)
 title = "Final Boundary Color"
 attached_nodes = PackedInt32Array(11, 57, 55, 61, 62)
 
@@ -219,7 +219,7 @@ expression = "boundary_color * brightness_factor"
 linked_parent_graph_frame = 54
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_ysv2c"]
-size = Vector2(604, 272)
+size = Vector2(604, 138)
 title = "Final color"
 attached_nodes = PackedInt32Array(64, 65)
 
@@ -321,7 +321,7 @@ void fragment() {
 
 
 // VectorCompose:41
-	float n_in41p3 = 1.00000;
+	float n_in41p3 = 0.00000;
 	vec4 n_out41p0 = vec4(n_out37p1, n_out37p2, n_out37p3, n_in41p3);
 
 
@@ -359,7 +359,7 @@ void fragment() {
 
 
 // VectorCompose:40
-	float n_in40p3 = 1.00000;
+	float n_in40p3 = 0.00000;
 	vec4 n_out40p0 = vec4(n_out36p1, n_out36p2, n_out36p3, n_in40p3);
 
 
@@ -455,7 +455,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-1528.13, -296.29)
 mode = 1
 flags/light_only = false
 nodes/fragment/0/position = Vector2(2000, -200)

@@ -13,6 +13,10 @@ var jump_velocity = Vector2.ZERO
 var last_up_vector = Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var direction := Input.get_axis("move_left", "move_right")
+	
 	var collision = get_last_slide_collision()
 	if collision:
 		gravity_velocity = 0
@@ -20,20 +24,19 @@ func _physics_process(delta: float) -> void:
 		if not is_ghost_collision(up_vector, collision.get_normal()):
 			update_frame_of_reference(collision.get_normal())
 		
+		jump_velocity = Vector2.ZERO
+		
 		if did_input("jump"):
 			jump_velocity += up_vector * jump
 			
-		jump_velocity *= 0.95
 	else:
 		last_up_vector = Vector2.ZERO
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("move_left", "move_right")
+	
 	
 	if direction < 0:
 		%Art.scale.x = -1
-	else:
+	elif direction > 0.001:
 		%Art.scale.x = 1
 		
 	if direction:
@@ -60,17 +63,12 @@ func update_frame_of_reference(collision_normal):
 	
 	var was_on_air = last_up_vector.is_equal_approx(Vector2.ZERO)
 	var left_wall = up_vector.is_equal_approx(Vector2.RIGHT)
-	if was_on_air and left_wall:
-		right_vector = -right_vector
-		%Art.scale.y = -1
-	else:
-		%Art.scale.y = 1
 		
 	last_up_vector = up_vector
 	jump_velocity = Vector2.ZERO
 
 func is_ghost_collision(vec, maybe_ghost):
-	return vec.is_equal_approx(maybe_ghost)
+	return abs(vec.x - maybe_ghost.x) < 0.001 and abs(vec.y - maybe_ghost.y) < 0.001
 
 func _on_mouse_state_entered() -> void:
 	possess()

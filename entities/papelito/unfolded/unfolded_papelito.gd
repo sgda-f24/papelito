@@ -16,6 +16,7 @@ func _ready() -> void:
 	safe_margin = 0.04
 
 func _physics_process(delta: float) -> void:
+	super._physics_process(delta)
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -54,4 +55,8 @@ func _on_unfolded_state_entered() -> void:
 	
 
 func _on_unfolded_state_exited() -> void:
+	un_possess()
+
+
+func _on_unfolded_transition_pending(initial_delay: float, remaining_delay: float) -> void:
 	un_possess()

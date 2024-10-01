@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://pfcfrt16abmg"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8xgjv"]
+
+[node name="FoldingTransition" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_8xgjv")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="SubViewport"]

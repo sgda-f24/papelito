@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 		if did_input("jump"):
 			jump_velocity += up_vector * jump
 			
-		jump_velocity *= 0.95
+		jump_velocity = Vector2.ZERO
 	else:
 		last_up_vector = Vector2.ZERO
 
@@ -70,7 +70,7 @@ func update_frame_of_reference(collision_normal):
 	jump_velocity = Vector2.ZERO
 
 func is_ghost_collision(vec, maybe_ghost):
-	return vec.is_equal_approx(maybe_ghost)
+	return abs(vec.x - maybe_ghost.x) < 0.001 and abs(vec.y - maybe_ghost.y) < 0.001
 
 func _on_mouse_state_entered() -> void:
 	possess()

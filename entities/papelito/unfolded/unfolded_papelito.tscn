@@ -1,11 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bt4m5glv63l8p"]
+[gd_scene load_steps=10 format=3 uid="uid://bt4m5glv63l8p"]
 
 [ext_resource type="Script" path="res://entities/papelito/unfolded/unfolded_papelito.gd" id="1_vycwu"]
 [ext_resource type="Shader" path="res://entities/papelito/unfolded/wind.gdshader" id="2_bvyih"]
 [ext_resource type="Shader" path="res://entities/papelito/unfolded/eye_wind.gdshader" id="3_k88af"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_14xl3"]
-viewport_path = NodePath("Art/CaptureTexture")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1n213"]
 shader = ExtResource("2_bvyih")
@@ -29,24 +26,17 @@ fill_from = Vector2(0.5, 0.5)
 shader = ExtResource("3_k88af")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wh6c1"]
-radius = 77.0
-height = 256.0
+radius = 247.0
+height = 754.0
 
 [node name="Unfolded" type="CharacterBody2D"]
-collision_layer = 2
 script = ExtResource("1_vycwu")
 
-[node name="Art" type="Sprite2D" parent="."]
+[node name="Art" type="Node2D" parent="."]
 unique_name_in_owner = true
-texture = SubResource("ViewportTexture_14xl3")
+scale = Vector2(3, 3)
 
-[node name="CaptureTexture" type="SubViewport" parent="Art"]
-disable_3d = true
-transparent_bg = true
-
-[node name="Origin" type="Camera2D" parent="Art/CaptureTexture"]
-
-[node name="Body" type="Polygon2D" parent="Art/CaptureTexture"]
+[node name="Body" type="Polygon2D" parent="Art"]
 material = SubResource("ShaderMaterial_1n213")
 scale = Vector2(2.43262, 2.84342)
 color = Color(0.9, 0.9, 0.9, 1)
@@ -54,7 +44,7 @@ antialiased = true
 polygon = PackedVector2Array(-32.8864, -45.0162, -19.7318, -45.0162, -6.57727, -45.0162, 6.57727, -45.0162, 19.7318, -45.0162, 32.8864, -45.0162, 32.8864, -33.7622, 32.8864, -22.5081, 32.8864, -11.2541, 32.8864, 0, 32.8864, 11.2541, 32.8864, 22.5081, 32.8864, 33.7622, 32.8864, 45.0162, 19.7318, 45.0162, 6.57727, 45.0162, -6.57727, 45.0162, -19.7318, 45.0162, -32.8864, 45.0162, -32.8864, 33.7622, -32.8864, 22.5081, -32.8864, 11.2541, -32.8864, 0, -32.8864, -11.2541, -32.8864, -22.5081, -32.8864, -33.7622)
 uv = PackedVector2Array(-32.8864, -45.0162, -19.7318, -45.0162, -6.57727, -45.0162, 6.57727, -45.0162, 19.7318, -45.0162, 32.8864, -45.0162, 32.8864, -33.7622, 32.8864, -22.5081, 32.8864, -11.2541, 32.8864, 0, 32.8864, 11.2541, 32.8864, 22.5081, 32.8864, 33.7622, 32.8864, 45.0162, 19.7318, 45.0162, 6.57727, 45.0162, -6.57727, 45.0162, -19.7318, 45.0162, -32.8864, 45.0162, -32.8864, 33.7622, -32.8864, 22.5081, -32.8864, 11.2541, -32.8864, 0, -32.8864, -11.2541, -32.8864, -22.5081, -32.8864, -33.7622)
 
-[node name="LeftEye" type="Polygon2D" parent="Art/CaptureTexture"]
+[node name="LeftEye" type="Polygon2D" parent="Art"]
 material = SubResource("ShaderMaterial_c8g1b")
 position = Vector2(16, -64)
 color = Color(0, 0, 0, 1)
@@ -62,7 +52,7 @@ texture = SubResource("GradientTexture2D_n6lo4")
 polygon = PackedVector2Array(-4, -4, -4, 4, 4, 4, 4, -4)
 uv = PackedVector2Array(4.81571, 3.32819, 4.81571, 251.328, 252.816, 251.328, 252.816, 3.32819)
 
-[node name="RightEye" type="Polygon2D" parent="Art/CaptureTexture"]
+[node name="RightEye" type="Polygon2D" parent="Art"]
 material = SubResource("ShaderMaterial_1s02c")
 position = Vector2(-16, -64)
 texture = SubResource("GradientTexture2D_n6lo4")

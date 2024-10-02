@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://levels/folding_map.gd" id="2_2sloq"]
 [ext_resource type="TileSet" uid="uid://cunk4g7ai43eu" path="res://entities/tiles/tiles.tres" id="2_qbk74"]
-[ext_resource type="TileSet" uid="uid://dbb4p8gjokgo3" path="res://entities/tiles/tiles_flip.tres" id="3_3xtvj"]
+[ext_resource type="TileSet" uid="uid://dbb4p8gjokgo3" path="res://entities/tiles/tiles_fold.tres" id="3_3xtvj"]
 
 [node name="FoldingMap" type="TileMapLayer"]
 scale = Vector2(0.1, 0.1)

@@ -4,7 +4,7 @@ extends Possess
 @export var walk_frequency = 0.05
 @export var walk_amplitude = 0.1
 @export var speed = 300.0
-@export var jump = -400.0
+@export var jump = -500.0
 
 var distance_travelled = 0
 var prev_direction = 1;

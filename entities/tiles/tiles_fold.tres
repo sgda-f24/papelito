@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://dbb4p8gjokgo3"]
+[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://day41whvhole0"]
 
 [ext_resource type="PackedScene" uid="uid://bt7gjbreprl6" path="res://entities/tiles/diamond/diamond.tscn" id="1_lna0w"]
 [ext_resource type="PackedScene" uid="uid://bmucffnah3o1e" path="res://entities/tiles/edge/edge.tscn" id="2_056h1"]

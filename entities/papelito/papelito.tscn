@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://2j04mlky382n" path="res://entities/papelito/mouse/mouse_papelito.tscn" id="5_ue8q7"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_eytkx"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="6_na5v8"]
-[ext_resource type="PackedScene" uid="uid://pfcfrt16abmg" path="res://entities/papelito/folding_transition.tscn" id="9_u5f4m"]
+[ext_resource type="PackedScene" path="res://entities/papelito/folding_transition.tscn" id="9_u5f4m"]
 
 [sub_resource type="Resource" id="Resource_lnobj"]
 script = ExtResource("6_na5v8")
@@ -35,9 +35,12 @@ script = ExtResource("3_nps4l")
 [node name="Unfolded" type="Node" parent="StateChart/Root"]
 script = ExtResource("4_yfr22")
 
-[node name="Transition" type="Node" parent="StateChart/Root/Unfolded"]
+[node name="CompoundState" type="Node" parent="StateChart/Root/Unfolded"]
+script = ExtResource("3_t2xkn")
+
+[node name="Transition" type="Node" parent="StateChart/Root/Unfolded/CompoundState"]
 script = ExtResource("6_eytkx")
-to = NodePath("../../Mouse")
+to = NodePath("../../../Mouse")
 event = &"to_mouse"
 guard = SubResource("Resource_lnobj")
 delay_in_seconds = "1.0"
@@ -65,7 +68,6 @@ unique_name_in_owner = true
 
 [node name="Mouse" parent="." instance=ExtResource("5_ue8q7")]
 unique_name_in_owner = true
-position = Vector2(0, 95)
 
 [node name="FoldingTransition" parent="." instance=ExtResource("9_u5f4m")]
 

@@ -36,10 +36,10 @@ func _physics_process(delta: float) -> void:
 	
 	
 	if direction < 0:
-		%Art.scale.x = -1
+		%Art.scale.x = -abs(%Art.scale.x)
 	elif direction > 0.001:
-		%Art.scale.x = 1
-		
+		%Art.scale.x = abs(%Art.scale.x)
+		1
 	if direction:
 		velocity = (right_vector - up_vector*0.01*direction) * direction * speed 
 	else:
@@ -57,7 +57,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func update_frame_of_reference(collision_normal):
-	print("Changing Frame of Reference to: ", collision_normal)
 	up_vector = collision_normal
 	right_vector = -up_vector.orthogonal()
 	%Art.global_rotation = right_vector.angle()

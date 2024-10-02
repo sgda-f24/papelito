@@ -35,12 +35,9 @@ script = ExtResource("3_nps4l")
 [node name="Unfolded" type="Node" parent="StateChart/Root"]
 script = ExtResource("4_yfr22")
 
-[node name="CompoundState" type="Node" parent="StateChart/Root/Unfolded"]
-script = ExtResource("3_t2xkn")
-
-[node name="Transition" type="Node" parent="StateChart/Root/Unfolded/CompoundState"]
+[node name="Transition" type="Node" parent="StateChart/Root/Unfolded"]
 script = ExtResource("6_eytkx")
-to = NodePath("../../../Mouse")
+to = NodePath("../../Mouse")
 event = &"to_mouse"
 guard = SubResource("Resource_lnobj")
 delay_in_seconds = "1.0"

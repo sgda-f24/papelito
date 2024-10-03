@@ -1,0 +1,90 @@
+[gd_scene load_steps=8 format=3 uid="uid://dkw5cvxq4miek"]
+
+[ext_resource type="PackedScene" uid="uid://dpal0h5nhr48i" path="res://entities/scissor/scissor-model.glb" id="1_cavlv"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_tpl75"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Curve3D" id="Curve3D_6sxbj"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 100, 100, 0, 0, 0, 0, 0, 0, 0, 110, 110, 0, 0, 0, 0, 20, 0, 0, 120, 120, 0, 0, 0, 0, 0, 0, 0, -171.728, 191.466, 19.158, 0, 0, 0, 0, 0, 0, 270.955, -107.118, -282.599, 0, 0, 0, 0, 0, 0, 194.17, -116.855, -150.621, 0, 0, 0, 0, 0, 0, 147.705, -9.85489, -76.302, 0, 0, 0, 0, 0, 0, 100, 100, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 8
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_e8ysb"]
+lightmap_size_hint = Vector2i(7, 7)
+flip_faces = true
+size = Vector2(1200, 700)
+orientation = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_85huu"]
+size = Vector2(1200, 700)
+orientation = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_d40rm"]
+size = Vector2(1200, 1200)
+orientation = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_8m24y"]
+flip_faces = true
+size = Vector2(1200, 1200)
+orientation = 1
+
+[node name="Scissor" type="Node2D"]
+position = Vector2(-1, -1)
+
+[node name="Texture Capture" type="Sprite2D" parent="."]
+texture = SubResource("ViewportTexture_tpl75")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+msaa_3d = 3
+size = Vector2i(1200, 700)
+
+[node name="Left Right" type="OmniLight3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 2)
+
+[node name="Right Light" type="OmniLight3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 2)
+
+[node name="Path3D" type="Path3D" parent="SubViewport"]
+curve = SubResource("Curve3D_6sxbj")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="SubViewport/Path3D"]
+transform = Transform3D(7.54968e-08, -0.70709, -0.707094, 0, 0.70709, -0.707094, 0.999986, 5.33838e-08, 5.33841e-08, 100, 100, 0)
+
+[node name="Pivot" type="Node3D" parent="SubViewport/Path3D/PathFollow3D"]
+transform = Transform3D(0.969048, -9.1415e-10, 0.246877, -0.0132918, 0.998554, 0.0521732, -0.246519, -0.0538399, 0.967643, 0, 0, 0)
+
+[node name="Scissor Origin" type="Node3D" parent="SubViewport/Path3D/PathFollow3D/Pivot"]
+transform = Transform3D(-4.37114e-08, 0, -1, -1, -4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 1.91069e-15, 0, 0, -17.0009)
+rotation_order = 0
+
+[node name="Scissor Model" parent="SubViewport/Path3D/PathFollow3D/Pivot/Scissor Origin" instance=ExtResource("1_cavlv")]
+transform = Transform3D(25, 4.54747e-13, -2.14011e-21, 5.68434e-13, 25, 6.32745e-15, -2.42647e-21, 2.70894e-14, 25, -9.89831, -0.710951, 2.70649)
+
+[node name="Frustum" type="Node3D" parent="SubViewport"]
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport/Frustum"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 600)
+current = true
+fov = 45.0
+size = 1200.0
+
+[node name="Right" type="MeshInstance3D" parent="SubViewport/Frustum"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 600, 0, 0)
+mesh = SubResource("PlaneMesh_e8ysb")
+skeleton = NodePath("../..")
+
+[node name="Left" type="MeshInstance3D" parent="SubViewport/Frustum"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -600, 0, 0)
+mesh = SubResource("QuadMesh_85huu")
+
+[node name="Bottom" type="MeshInstance3D" parent="SubViewport/Frustum"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -350, 0)
+mesh = SubResource("QuadMesh_d40rm")
+
+[node name="Up" type="MeshInstance3D" parent="SubViewport/Frustum"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 350, 0)
+mesh = SubResource("QuadMesh_8m24y")

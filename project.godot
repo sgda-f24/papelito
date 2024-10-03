@@ -28,6 +28,10 @@ project/assembly_name="Paper Pursuit"
 
 enabled=PackedStringArray("res://addons/godot-vim/plugin.cfg", "res://addons/godot_state_charts/plugin.cfg")
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 move_left={

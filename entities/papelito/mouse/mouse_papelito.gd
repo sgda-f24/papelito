@@ -67,8 +67,8 @@ func update_frame_of_reference(collision_normal):
 	last_up_vector = up_vector
 	jump_velocity = Vector2.ZERO
 
-func is_ghost_collision(vec, maybe_ghost):
-	return abs(vec.x - maybe_ghost.x) < 0.001 and abs(vec.y - maybe_ghost.y) < 0.001
+func is_ghost_collision(vec, maybe_ghost, epsilon = 0.01):
+	return abs(vec.x - maybe_ghost.x) < epsilon and abs(vec.y - maybe_ghost.y) < epsilon
 
 func _on_mouse_state_entered() -> void:
 	possess()

@@ -27,8 +27,7 @@ func possess():
 	%PapelitoCam.transform = Transform2D.IDENTITY
 
 func un_possess():
-	if self.transform != Transform2D.IDENTITY:
-		get_parent().transform = self.global_transform
+	get_parent().transform = self.global_transform
 	self.transform = Transform2D.IDENTITY
 	visible = false
 	process_mode = PROCESS_MODE_DISABLED

@@ -51,12 +51,12 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func _on_unfolded_state_entered() -> void:
+	print("why you")
+	var boss_node = $"../../BossScissor"
+	boss_node.follow_target = self
 	possess()
 	
 
 func _on_unfolded_state_exited() -> void:
-	un_possess()
-
-
-func _on_unfolded_transition_pending(initial_delay: float, remaining_delay: float) -> void:
+	$"BossScissor".reparent($"../../")
 	un_possess()

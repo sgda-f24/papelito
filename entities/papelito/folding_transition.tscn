@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://pfcfrt16abmg"]
+[gd_scene load_steps=8 format=3 uid="uid://pfcfrt16abmg"]
 
 [ext_resource type="Shader" path="res://entities/papelito/unfolded/eye_wind.gdshader" id="1_8e3mw"]
-[ext_resource type="Script" path="res://addons/papershot/papershot.gd" id="2_xclol"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8xgjv"]
 
@@ -25,12 +24,6 @@ fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7b0p5"]
 shader = ExtResource("1_8e3mw")
-
-[sub_resource type="InputEventAction" id="InputEventAction_n4d2l"]
-action = &"take_screenshot"
-
-[sub_resource type="Shortcut" id="Shortcut_08obf"]
-events = [SubResource("InputEventAction_n4d2l")]
 
 [node name="FoldingTransition" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_8xgjv")
@@ -71,10 +64,6 @@ color = Color(0, 0, 0, 1)
 texture = SubResource("GradientTexture2D_3un1o")
 polygon = PackedVector2Array(-4, -4, -4, 4, 4, 4, 4, -4)
 uv = PackedVector2Array(4.81571, 3.32819, 4.81571, 251.328, 252.816, 251.328, 252.816, 3.32819)
-
-[node name="Papershot" type="Node" parent="FirstFold/SubViewport"]
-script = ExtResource("2_xclol")
-shortcut = SubResource("Shortcut_08obf")
 
 [node name="Second" type="Sprite2D" parent="."]
 visible = false

@@ -1,0 +1,81 @@
+[gd_scene load_steps=7 format=3 uid="uid://dkw5cvxq4miek"]
+
+[ext_resource type="PackedScene" uid="uid://dpal0h5nhr48i" path="res://entities/scissor/scissor-model.glb" id="1_7edew"]
+[ext_resource type="Script" path="res://entities/scissor/path_follow_3d.gd" id="2_gaclf"]
+
+[sub_resource type="GDScript" id="GDScript_c1e6h"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_tpl75"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Curve3D" id="Curve3D_4urco"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -198.099, 92.4351, -11.6404),
+"tilts": PackedFloat32Array(0)
+}
+point_count = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_d0t8r"]
+flip_faces = true
+size = Vector3(1200, 400, 1200)
+
+[node name="Scissor" type="Node2D"]
+script = SubResource("GDScript_c1e6h")
+
+[node name="Texture Capture" type="Sprite2D" parent="."]
+z_index = -1
+texture = SubResource("ViewportTexture_tpl75")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+msaa_3d = 3
+debug_draw = 2
+size = Vector2i(1200, 700)
+
+[node name="Pivot" type="Node3D" parent="SubViewport"]
+transform = Transform3D(-0.933016, 0.36002, 0, -0.360021, -0.933015, 0, 0, 0, 1.00007, 300, 100, 0)
+
+[node name="Scissor Origin" type="Node3D" parent="SubViewport/Pivot"]
+transform = Transform3D(-4.37114e-08, 0, -1, -1, -4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 1.91069e-15, 0, 0, -17.0009)
+rotation_order = 0
+
+[node name="Scissor Model" parent="SubViewport/Pivot/Scissor Origin" instance=ExtResource("1_7edew")]
+transform = Transform3D(25, 4.54747e-13, -2.14011e-21, 5.68434e-13, 25, 6.32745e-15, -2.42647e-21, 2.70894e-14, 25, -9.89831, -0.710951, 2.70649)
+
+[node name="Light1" type="OmniLight3D" parent="SubViewport/Pivot"]
+transform = Transform3D(1, 2.97997e-08, 4.66298e-15, -2.97997e-08, 1, -3.55239e-15, -4.66298e-15, 3.55239e-15, 1, 60.1461, -41.802, 186.691)
+light_energy = 1000.0
+omni_range = 4096.0
+
+[node name="Light2" type="OmniLight3D" parent="SubViewport/Pivot"]
+transform = Transform3D(1, 2.97997e-08, 4.66298e-15, -2.97997e-08, 1, 0, -4.66298e-15, -1.38956e-22, 1, -166.911, -28.9295, 120.767)
+omni_range = 4096.0
+
+[node name="Path3D" type="Path3D" parent="SubViewport"]
+curve = SubResource("Curve3D_4urco")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="SubViewport/Path3D"]
+transform = Transform3D(0.149586, -0.42613, -0.89213, 4.21671e-06, 0.902292, -0.430975, 0.988672, 0.0644696, 0.134981, 143.606, 257.508, -63.3409)
+progress = 1196.84
+script = ExtResource("2_gaclf")
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0113983, 1.0414, 399.826)
+fov = 90.0
+size = 1200.0
+
+[node name="Room" type="MeshInstance3D" parent="SubViewport"]
+visible = false
+mesh = SubResource("BoxMesh_d0t8r")

@@ -6,18 +6,21 @@ class_name Possess
 @onready var state_manager: StateManager = %StateManager
 @onready var state_chart: StateChart = %StateChart
 
-var on_floor = true
+var on_contact = false 
 
 func _ready():
 	un_possess()
-	state_chart.set_expression_property("on_floor", on_floor)
+	state_chart.set_expression_property("on_contact", on_contact)
 
 func _process(_delta: float) -> void:
 	%PapelitoCam.global_rotation = 0
 
 func _physics_process(delta: float) -> void:
-	on_floor = is_on_floor()
-	state_chart.set_expression_property("on_floor", on_floor)
+	if get_last_slide_collision():
+		on_contact = true
+	else:
+		on_contact = false
+	state_chart.set_expression_property("on_contact", on_contact)
 
 func possess():
 	cast_to_floor()

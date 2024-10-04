@@ -1,6 +1,7 @@
-[gd_scene format=3 uid="uid://cgitx2382sch8"]
+[gd_scene format=3 uid="uid://bvh335hb44m28"]
 
 [node name="GUI" type="CanvasLayer"]
+visible = false
 follow_viewport_enabled = true
 
 [node name="Camera" type="Control" parent="."]

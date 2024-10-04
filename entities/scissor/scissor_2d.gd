@@ -25,7 +25,6 @@ func _process(delta: float) -> void:
 	else:
 		var following_path: PathFollow3D = wander_path.get_child(0)
 		following_path.progress += delta*100
-		
 
 func _on_unfolded_state_entered() -> void:
 	following = true

@@ -13,6 +13,7 @@ func _ready():
 	state_chart.set_expression_property("on_contact", on_contact)
 
 func _process(_delta: float) -> void:
+	print("hola")
 	%PapelitoCam.global_rotation = 0
 
 func _physics_process(delta: float) -> void:

@@ -10,13 +10,13 @@ shader = ExtResource("2_bvyih")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c8g1b"]
 shader = ExtResource("3_k88af")
 
-[sub_resource type="Gradient" id="Gradient_jt5cd"]
+[sub_resource type="Gradient" id="Gradient_1yx24"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0.59434, 0.603774)
 colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_n6lo4"]
-gradient = SubResource("Gradient_jt5cd")
+gradient = SubResource("Gradient_1yx24")
 width = 256
 height = 256
 fill = 1

@@ -56,3 +56,7 @@ func _on_unfolded_state_entered() -> void:
 
 func _on_unfolded_state_exited() -> void:
 	un_possess()
+
+
+func _on_unfolded_transition_pending(initial_delay: float, remaining_delay: float) -> void:
+	%Art.visible = false

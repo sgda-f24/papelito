@@ -6,8 +6,13 @@
 [sub_resource type="ViewportTexture" id="ViewportTexture_tpl75"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="Curve3D" id="Curve3D_4urco"]
-bake_interval = 512.0
+[sub_resource type="Curve3D" id="Curve3D_rhpic"]
+bake_interval = 400.32
+_data = {
+"points": PackedVector3Array(0, 0, 0, -0.968, -0.251, 0, 270, 170, 0, 0, 0, 0, 0, 0, 0, 209.856, 311.978, -87.2879, 0, 0, 0, 0, 0, 0, 426.883, 268.375, -312.347, 0, 0, 0, -0.968, -0.251, 0, 270, 170, 0),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
 
 [sub_resource type="BoxMesh" id="BoxMesh_d0t8r"]
 flip_faces = true
@@ -21,17 +26,20 @@ z_index = -1
 texture = SubResource("ViewportTexture_tpl75")
 
 [node name="SubViewport" type="SubViewport" parent="."]
+unique_name_in_owner = true
 transparent_bg = true
 msaa_3d = 3
-debug_draw = 2
 size = Vector2i(1200, 700)
+
+[node name="Origin" type="Node3D" parent="SubViewport"]
+unique_name_in_owner = true
 
 [node name="ScissorsModel" parent="SubViewport" instance=ExtResource("2_e88mk")]
 unique_name_in_owner = true
-transform = Transform3D(0.878817, -0.477159, 0, 0.477159, 0.878817, 0, 0, 0, 1, 270, 170, 0)
+transform = Transform3D(-0.846173, 0.532863, -1.33503e-13, -0.532864, -0.846172, -5.46822e-14, -1.42109e-13, 2.4869e-14, 0.999975, 300, 200, 0)
 
 [node name="Sketchfab_model" parent="SubViewport/ScissorsModel" index="0"]
-transform = Transform3D(50, 0, 0, 0, -2.18557e-06, 50, 0, -50, -2.18557e-06, -14.247, -11.5328, 0)
+transform = Transform3D(-50, 4.37114e-06, 1.91069e-13, 0, -2.18557e-06, 50, 4.37114e-06, 50, 2.18557e-06, -14.247, -11.5328, 0)
 
 [node name="1_high" parent="SubViewport/ScissorsModel/Sketchfab_model/353ba5108f494617a6e9a40ef4e3da64_fbx/Object_2/RootNode" index="0"]
 transform = Transform3D(100, 8.73115e-09, 3.81651e-16, 0, -4.37114e-06, 100, 8.73115e-09, -100, -4.37114e-06, 28.666, 24.019, 0.00775103)
@@ -48,11 +56,10 @@ movie_quit_on_finish = true
 
 [node name="Wander" type="Path3D" parent="SubViewport"]
 unique_name_in_owner = true
-curve = SubResource("Curve3D_4urco")
+curve = SubResource("Curve3D_rhpic")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="SubViewport/Wander"]
-transform = Transform3D(0.999925, 0, 0, 0, 0.999939, 0, 0, 0, 0.999927, 0, 0, 0)
-use_model_front = true
+transform = Transform3D(7.54971e-08, -0.251004, 0.967978, 0, 0.967975, 0.251005, -0.99999, -1.89503e-08, 7.30803e-08, 270, 170, 0)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0113983, 1.0414, 399.826)
@@ -67,7 +74,5 @@ mesh = SubResource("BoxMesh_d0t8r")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 849.975)
-light_energy = 5.962
-light_angular_distance = 18.0
 
 [editable path="SubViewport/ScissorsModel"]

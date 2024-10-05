@@ -1,5 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://cimaykirqo303"]
+[gd_scene load_steps=21 format=3 uid="uid://cimaykirqo303"]
 
+[ext_resource type="Script" path="res://entities/papelito/papelito.gd" id="1_w6agj"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_b6q42"]
 [ext_resource type="Script" path="res://entities/papelito/state_manager.gd" id="3_nps4l"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="3_t2xkn"]
@@ -10,8 +11,21 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="6_na5v8"]
 [ext_resource type="PackedScene" uid="uid://dkw5cvxq4miek" path="res://entities/scissor/scissor_2d.tscn" id="7_w5hfv"]
 [ext_resource type="PackedScene" uid="uid://ctaf7lxdmq1yc" path="res://entities/papelito/transition/folding.tscn" id="10_q2wum"]
+[ext_resource type="PackedScene" uid="uid://dv6d0hlaqo5bm" path="res://entities/papelito/kill.tscn" id="11_knbs4"]
 
 [sub_resource type="Resource" id="Resource_lnobj"]
+script = ExtResource("6_na5v8")
+expression = "on_contact"
+
+[sub_resource type="Resource" id="Resource_0pdrp"]
+script = ExtResource("6_na5v8")
+expression = "on_contact"
+
+[sub_resource type="Resource" id="Resource_wwhl1"]
+script = ExtResource("6_na5v8")
+expression = "on_contact"
+
+[sub_resource type="Resource" id="Resource_84l5f"]
 script = ExtResource("6_na5v8")
 expression = "on_contact"
 
@@ -19,7 +33,20 @@ expression = "on_contact"
 script = ExtResource("6_na5v8")
 expression = "on_contact"
 
+[sub_resource type="Resource" id="Resource_qqukt"]
+script = ExtResource("6_na5v8")
+expression = "on_contact"
+
+[sub_resource type="Resource" id="Resource_nro0i"]
+script = ExtResource("6_na5v8")
+expression = "on_contact"
+
+[sub_resource type="Resource" id="Resource_4ddo3"]
+script = ExtResource("6_na5v8")
+expression = "on_contact"
+
 [node name="Papelito" type="Node2D"]
+script = ExtResource("1_w6agj")
 
 [node name="StateChart" type="Node" parent="."]
 unique_name_in_owner = true
@@ -36,12 +63,33 @@ script = ExtResource("3_nps4l")
 [node name="Unfolded" type="Node" parent="StateChart/Root"]
 script = ExtResource("4_yfr22")
 
-[node name="Transition" type="Node" parent="StateChart/Root/Unfolded"]
+[node name="ToMouse" type="Node" parent="StateChart/Root/Unfolded"]
 script = ExtResource("6_eytkx")
 to = NodePath("../../Mouse")
 event = &"to_mouse"
 guard = SubResource("Resource_lnobj")
-delay_in_seconds = "0.0"
+delay_in_seconds = "1.0"
+
+[node name="ToBoat" type="Node" parent="StateChart/Root/Unfolded"]
+script = ExtResource("6_eytkx")
+to = NodePath("../../Boat")
+event = &"to_crane"
+guard = SubResource("Resource_0pdrp")
+delay_in_seconds = "1.0"
+
+[node name="ToCrane" type="Node" parent="StateChart/Root/Unfolded"]
+script = ExtResource("6_eytkx")
+to = NodePath("../../Crane")
+event = &"to_crane"
+guard = SubResource("Resource_wwhl1")
+delay_in_seconds = "1.0"
+
+[node name="ToDragon" type="Node" parent="StateChart/Root/Unfolded"]
+script = ExtResource("6_eytkx")
+to = NodePath("../../Dragon")
+event = &"to_dragon"
+guard = SubResource("Resource_84l5f")
+delay_in_seconds = "1.0"
 
 [node name="Mouse" type="Node" parent="StateChart/Root"]
 script = ExtResource("4_yfr22")
@@ -53,30 +101,74 @@ event = &"to_unfold"
 guard = SubResource("Resource_jalhw")
 delay_in_seconds = "0.0"
 
+[node name="Boat" type="Node" parent="StateChart/Root"]
+script = ExtResource("4_yfr22")
+
+[node name="Transition" type="Node" parent="StateChart/Root/Boat"]
+script = ExtResource("6_eytkx")
+to = NodePath("../../Unfolded")
+event = &"to_unfold"
+guard = SubResource("Resource_qqukt")
+delay_in_seconds = "0.0"
+
+[node name="Crane" type="Node" parent="StateChart/Root"]
+script = ExtResource("4_yfr22")
+
+[node name="Transition" type="Node" parent="StateChart/Root/Crane"]
+script = ExtResource("6_eytkx")
+to = NodePath("../../Unfolded")
+event = &"to_unfold"
+guard = SubResource("Resource_nro0i")
+delay_in_seconds = "0.0"
+
+[node name="Dragon" type="Node" parent="StateChart/Root"]
+script = ExtResource("4_yfr22")
+
+[node name="Transition" type="Node" parent="StateChart/Root/Dragon"]
+script = ExtResource("6_eytkx")
+to = NodePath("../../Unfolded")
+event = &"to_unfold"
+guard = SubResource("Resource_4ddo3")
+delay_in_seconds = "0.0"
+
 [node name="PapelitoCam" type="Camera2D" parent="."]
 unique_name_in_owner = true
 ignore_rotation = false
-zoom = Vector2(0.5, 0.5)
-position_smoothing_enabled = true
+zoom = Vector2(0.25, 0.25)
+position_smoothing_speed = 10.0
 rotation_smoothing_enabled = true
 rotation_smoothing_speed = 0.001
 
 [node name="ScissorsBoss" parent="." instance=ExtResource("7_w5hfv")]
 unique_name_in_owner = true
+position = Vector2(-328, 80)
 scale = Vector2(4, 4)
 
 [node name="Unfolded" parent="." instance=ExtResource("4_n7ys7")]
 unique_name_in_owner = true
-speed = 650.0
-jump = -850.0
+collision_layer = 3
 
 [node name="Mouse" parent="." instance=ExtResource("5_ue8q7")]
 unique_name_in_owner = true
-walk_length = 1.5
+collision_layer = 3
+collision_mask = 3
+walk_frequency = null
+walk_amplitude = null
+jump = null
+
+[node name="Boat" parent="." instance=ExtResource("4_n7ys7")]
+unique_name_in_owner = true
+collision_layer = 3
 
 [node name="Folding" parent="." instance=ExtResource("10_q2wum")]
+unique_name_in_owner = true
 visible = false
-scale = Vector2(0.25, 0.25)
+position = Vector2(3.99999, 5.19753e-05)
+scale = Vector2(0.503333, 0.5)
+
+[node name="Kill" parent="." instance=ExtResource("11_knbs4")]
+rotation = 2.39459
+scale = Vector2(2, 4)
 
 [connection signal="state_input" from="StateChart/Root" to="StateChart/Root/StateManager" method="_on_root_state_input"]
 [connection signal="state_entered" from="StateChart/Root/Unfolded" to="ScissorsBoss" method="_on_unfolded_state_entered"]

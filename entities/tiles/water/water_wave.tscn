@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5a3qkeq5jrkc"]
+
+[ext_resource type="Shader" path="res://entities/tiles/water/water_wave.gdshader" id="1_sxvbv"]
+[ext_resource type="Texture2D" uid="uid://bcpunhpu5huly" path="res://entities/tiles/corner/corner.png" id="2_c8xti"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wn5q1"]
+shader = ExtResource("1_sxvbv")
+shader_parameter/wave_amplitude = 5.0
+shader_parameter/wave_frequency = 1.0
+shader_parameter/wave_speed = 5.0
+shader_parameter/upper_limit = 100.0
+shader_parameter/frag_wave_speed = 3.0
+shader_parameter/frag_wave_frequency = 10.0
+shader_parameter/frag_wave_width = 1.0
+shader_parameter/transparency = 0.5
+
+[node name="WaterWave" type="Polygon2D"]
+material = SubResource("ShaderMaterial_wn5q1")
+scale = Vector2(1.1, 1.1)
+color = Color(0.172549, 0.462745, 1, 1)
+texture = ExtResource("2_c8xti")
+polygon = PackedVector2Array(0, 256, 192, 64, 175.904, 64, 141.159, 64, 108.641, 64, 77.0145, 64, 44.0512, 64, 18.6606, 64, -12.5208, 64, -53.9476, 64, -88.2472, 64, -117.647, 64, -147.047, 64, -169.764, 64, -192, 64)
+uv = PackedVector2Array(253.475, 448.501, 445.475, 256.501, 429.379, 256.501, 394.634, 256.501, 362.116, 256.501, 330.489, 256.501, 297.526, 256.501, 272.135, 256.501, 240.954, 256.501, 199.527, 256.501, 165.227, 256.501, 135.828, 256.501, 106.428, 256.501, 83.7101, 256.501, 61.4746, 256.501)

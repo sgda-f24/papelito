@@ -1,19 +1,9 @@
 # class for unfolded form of papelito
 extends Possess
-
-@export var speed = 300.0
-@export var jump = -500.0
-
-var distance_travelled = 0
-var prev_direction = 1;
-var prev_velocity = Vector2()
-
-func _ready() -> void:
-	super._ready()
 	
-	safe_margin = 0.1
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -29,18 +19,30 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * speed
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
-
-
+		
 	move_and_slide()
 
 func _on_unfolded_state_entered() -> void:
 	possess()
 	%Art.visible = true
-	
+	zoom_out()
 
 func _on_unfolded_state_exited() -> void:
 	un_possess()
+	%Folding.visible = false
+	%Folding.stop()
+	zoom_in()
 
+func zoom_out():
+	var tween = get_tree().create_tween()
+	tween.tween_property(%PapelitoCam, "zoom", Vector2(0.25, 0.25), 1).set_trans(Tween.TRANS_CUBIC)
+	
+func zoom_in():
+	var tween = get_tree().create_tween()
+	tween.tween_property(%PapelitoCam, "zoom", Vector2(0.5, 0.5), 1).set_trans(Tween.TRANS_CUBIC)
 
 func _on_unfolded_transition_pending(initial_delay: float, remaining_delay: float) -> void:
-	%Art.visible = false
+	un_possess()
+	if not %Folding.is_playing():
+		%Folding.visible = true
+		%Folding.play()

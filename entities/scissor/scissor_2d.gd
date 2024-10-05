@@ -10,17 +10,20 @@ extends Node2D
 var following = true
 
 @export var follow_target_speed = 4.0
+@export var player_relative_pos = Vector2(0, 100)
 
 func _ready() -> void:
 	original_position = Vector2(scissor_model.position.x, scissor_model.position.y)
-	original_rotation = scissor_model.rotation.z
+	
+	var angle = original_position.angle_to(player_relative_pos)
+	original_rotation = 3*PI/2 - angle
 	%"ScissorsModel/AnimationPlayer".current_animation = "Scene"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if following:
 		var following_path: PathFollow3D = wander_path.get_child(0)
-		following_path.global_transform = following_path.transform.interpolate_with(Transform2D.IDENTITY, delta)
+		following_path.global_transform = following_path.transform.interpolate_with(scissor_model.transform, delta)
 		self.position = position.lerp(follow_target.position , delta * follow_target_speed)
 	else:
 		var following_path: PathFollow3D = wander_path.get_child(0)
@@ -28,16 +31,19 @@ func _process(delta: float) -> void:
 
 func _on_unfolded_state_entered() -> void:
 	following = true
+	scissor_model.reparent(%Origin)
 	scissor_model.transform = Transform3D.IDENTITY
-	scissor_model.position = Vector3(original_position.x, original_position.y, 0)
+	scissor_model.global_position = Vector3(original_position.x, original_position.y, 0)
 	scissor_model.rotate_z(original_rotation)
 	%"ScissorsModel/AnimationPlayer".play()
 
 func _on_unfolded_state_exited() -> void:
 	following = false
 	var following_path: PathFollow3D = wander_path.get_child(0)
-	following_path.progress = 0
+	following_path.progress = 0.0
 	scissor_model.transform = Transform3D.IDENTITY
+	scissor_model.position = Vector3(original_position.x, original_position.y, 0)
+	scissor_model.rotate_z(original_rotation)
 	self.position = Vector2.ZERO
 	initialize_random_curve(4)
 	scissor_model.reparent(following_path)
@@ -58,18 +64,19 @@ func generate_random_points_in_box(box_size: Vector3, number_of_points: int) -> 
 	return random_points
 	
 func initialize_random_curve(number_of_points: int) -> void:
-	var curve = wander_path.curve
-	curve.clear_points()
+	wander_path.curve = Curve3D.new()
+	wander_path.curve.bake_interval = 500
 	
-	var player_relative_pos = Vector2(0, 100)
 	var dir_to_player2d = original_position.direction_to(player_relative_pos)
 	var dir_to_player3d = Vector3(dir_to_player2d.x, dir_to_player2d.y, 0)
 	var starting_pos = Vector3(original_position.x, original_position.y, 0)
-	curve.add_point(starting_pos, dir_to_player3d, -dir_to_player3d)
+	wander_path.curve.add_point(starting_pos, Vector3.ZERO, dir_to_player3d)
+
 	
 	var box_size = (frustum_box.mesh as BoxMesh).size
 	var random_points = generate_random_points_in_box(box_size, number_of_points)
 	for point in random_points:
-		curve.add_point(point)
-
-	curve.add_point(starting_pos, dir_to_player3d, -dir_to_player3d)
+		wander_path.curve.add_point(point)
+		
+	wander_path.curve.add_point(starting_pos, -dir_to_player3d, Vector3.ZERO)
+	

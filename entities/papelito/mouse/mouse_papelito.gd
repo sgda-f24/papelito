@@ -1,10 +1,6 @@
 # class for mouse form of papelito
 extends Possess
 
-@export var walk_length = 0.15
-@export var speed = 500.0
-@export var jump = 400.0
-
 var up_vector = Vector2.ZERO # local up direction
 var right_vector = Vector2.ZERO # local right vector
 var gravity_velocity = 0
@@ -35,13 +31,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		last_up_vector = Vector2.ZERO
 
-	
-	
-	if direction < 0:
-		%Art.scale.x = -abs(%Art.scale.x)
-	elif direction > 0.001:
-		%Art.scale.x = abs(%Art.scale.x)
-		1
 	if direction:
 		velocity = (right_vector - up_vector*0.01*direction) * direction * speed 
 	else:

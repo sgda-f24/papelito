@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://dv6d0hlaqo5bm"]
+
+[ext_resource type="Texture2D" uid="uid://g0iau1j4dy58" path="res://entities/papelito/dash.png" id="1_lvesh"]
+
+[sub_resource type="Curve2D" id="Curve2D_yef3f"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 256, 0, 0, 0, 0, 0, -256, 0)
+}
+point_count = 2
+
+[node name="Killing Line" type="Node2D"]
+
+[node name="Node2D" type="Line2D" parent="."]
+visible = false
+position = Vector2(-512, 0)
+scale = Vector2(1.005, 200)
+points = PackedVector2Array(1018.91, 0, -3.05176e-05, 0)
+texture = ExtResource("1_lvesh")
+texture_mode = 2
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_yef3f")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(-256, 0)
+rotation = 3.14159
+progress = 512.0

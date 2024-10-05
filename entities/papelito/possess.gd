@@ -5,8 +5,12 @@ class_name Possess
 # Reference to the StateManager
 @onready var state_manager: StateManager = %StateManager
 @onready var state_chart: StateChart = %StateChart
+
+
 @export var walk_frequency = 0.01
 @export var walk_amplitude = 0.1
+@export var speed = 300.0
+@export var jump = -500.0
 
 var on_contact = false 
 
@@ -14,10 +18,26 @@ func _ready():
 	un_possess()
 	state_chart.set_expression_property("on_contact", on_contact)
 	
-	safe_margin = 0.05
-
+	safe_margin = 0.01
+	
 func _process(_delta: float) -> void:
 	%PapelitoCam.global_rotation = 0
+	
+	if Input.is_action_just_pressed("goto_checkpoint"):
+		if get_parent().checkpoint:
+			var transition_scene = load("res://levels/ui/fold_transition.tscn")
+			var instance = transition_scene.instantiate()
+			add_child(instance)
+			# Connect the signal before pausing
+			instance.connect("folding_finished", _on_folding_finished)
+			get_tree().paused = true
+
+func _on_folding_finished():
+	update_loc()
+
+func update_loc():
+	self.global_position = get_parent().checkpoint.global_position
+	cast_to_floor()
 
 func _physics_process(delta: float) -> void:
 	if get_last_slide_collision():
@@ -26,6 +46,15 @@ func _physics_process(delta: float) -> void:
 		on_contact = false
 	state_chart.set_expression_property("on_contact", on_contact)
 	
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var direction := Input.get_axis("move_left", "move_right")
+
+	if direction < 0:
+		%Art.scale.x = -abs(%Art.scale.x)
+	elif direction > 0.001:
+		%Art.scale.x = abs(%Art.scale.x)
+	
 	# Skew character periodically to simulate walking.
 	if velocity:
 		%Art.skew = sin(Time.get_ticks_msec()*walk_frequency) * walk_amplitude
@@ -33,7 +62,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		lerp(%Art.skew, 0., Time.get_ticks_msec())
 		lerp(%Art.rotation, 0., Time.get_ticks_msec())
-
+	
 func possess():
 	visible = true
 	process_mode = PROCESS_MODE_INHERIT
@@ -59,7 +88,7 @@ func cast_to_floor(max_distance: float = 500.0) -> bool:
 	var space_state = get_world_2d().direct_space_state
 	var result = space_state.cast_motion(query)
 	result.sort()
-	self.position += (result[0])*Vector2.DOWN*max_distance	- Vector2.DOWN*(collider.shape as CapsuleShape2D).height
+	self.position += result[0]*Vector2.DOWN*max_distance - Vector2.DOWN*(collider.shape as CapsuleShape2D).height
 	return true
 
 # Helper Function to Get CollisionShape2D

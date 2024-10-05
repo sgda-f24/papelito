@@ -1,9 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bt4m5glv63l8p"]
+[gd_scene load_steps=8 format=3 uid="uid://bt4m5glv63l8p"]
 
 [ext_resource type="Script" path="res://entities/papelito/unfolded/unfolded_papelito.gd" id="1_vycwu"]
 [ext_resource type="Shader" path="res://entities/papelito/unfolded/eye_wind.gdshader" id="3_k88af"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qnnn1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1s02c"]
 shader = ExtResource("3_k88af")
@@ -35,7 +33,6 @@ unique_name_in_owner = true
 scale = Vector2(6, 6)
 
 [node name="Polygon2D" type="Polygon2D" parent="Art"]
-material = SubResource("ShaderMaterial_qnnn1")
 scale = Vector2(0.333333, 0.333333)
 polygon = PackedVector2Array(-200, -200, 200, -200, 200, 200, -200, 200)
 

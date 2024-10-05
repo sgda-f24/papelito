@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://fsdeu71b1oer"]
+
+[ext_resource type="Shader" path="res://levels/ui/transition_fold.gdshader" id="1_ifemj"]
+[ext_resource type="Texture2D" uid="uid://cfypnsygowaax" path="res://entities/tiles/diamond/diamond.png" id="2_ycn4o"]
+[ext_resource type="Script" path="res://entities/tiles/folding_tile.gd" id="3_s2aoj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ivhet"]
+shader = ExtResource("1_ifemj")
+shader_parameter/fold_amount = 0.0
+shader_parameter/end_color = Color(0.585062, 0.585062, 0.585062, 1)
+shader_parameter/boundary_color = Color(1, 1, 1, 1)
+shader_parameter/max_boundary_width = 0.02
+
+[node name="TransitionTile" type="Polygon2D"]
+material = SubResource("ShaderMaterial_ivhet")
+rotation = 3.14159
+texture = ExtResource("2_ycn4o")
+polygon = PackedVector2Array(-256, 0, 0, -256, 256, 0, 0, 256)
+uv = PackedVector2Array(256.512, 11.7021, 500.807, 251.971, 260.54, 496.264, 16.2441, 255.996)
+script = ExtResource("3_s2aoj")
+unfold_delay = 0.5

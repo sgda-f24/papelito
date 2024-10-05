@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8hrlwnukjmlj"]
+
+[ext_resource type="Material" uid="uid://rnw53wgp1ty2" path="res://entities/tiles/water/water.material" id="1_0u820"]
+[ext_resource type="Texture2D" uid="uid://cfypnsygowaax" path="res://entities/tiles/diamond/diamond.png" id="2_lj0uy"]
+
+[node name="WaterBody" type="Polygon2D"]
+material = ExtResource("1_0u820")
+rotation = 3.14159
+color = Color(0.172549, 0.462745, 1, 1)
+texture = ExtResource("2_lj0uy")
+polygon = PackedVector2Array(-256, 0, 0, -256, 256, 0, 63.9995, 192, -64.0005, 192)
+uv = PackedVector2Array(5.66808, 257.546, 256.155, 7.05933, 506.641, 257.546, 318.776, 445.411, 193.532, 445.411)

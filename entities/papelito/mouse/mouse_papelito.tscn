@@ -1,31 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://2j04mlky382n"]
+[gd_scene load_steps=4 format=3 uid="uid://2j04mlky382n"]
 
 [ext_resource type="Script" path="res://entities/papelito/mouse/mouse_papelito.gd" id="1_l3in3"]
+[ext_resource type="Texture2D" uid="uid://m30tg1pg8xpw" path="res://entities/papelito/mouse/sgda_gameJam24_rodent.png" id="2_wjt12"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0w34v"]
-radius = 32.0
-height = 104.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7oggh"]
+radius = 71.0
+height = 142.0
 
 [node name="Mouse" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_l3in3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_0w34v")
+shape = SubResource("CapsuleShape2D_7oggh")
 
-[node name="Art" type="Node2D" parent="."]
+[node name="Art" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(1, -18)
-scale = Vector2(2, 2)
-
-[node name="Body" type="Polygon2D" parent="Art"]
-polygon = PackedVector2Array(-32, 16, -16, 32, 0, 16, 16, 32, 32, 16, 48, 16, 64, 16, 32, -16, -32, -16, -64, 16)
-
-[node name="Eye" type="Polygon2D" parent="Art"]
-position = Vector2(24, 0)
-scale = Vector2(0.5, 0.4375)
-color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(48, 0, 64, 0, 48, -16)
-
-[node name="Tail" type="Line2D" parent="Art"]
-points = PackedVector2Array(-32, 0, -64, 0, -97, 25, -129, 21)
+position = Vector2(-54.24, -14.545)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_wjt12")

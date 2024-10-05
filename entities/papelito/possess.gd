@@ -5,12 +5,16 @@ class_name Possess
 # Reference to the StateManager
 @onready var state_manager: StateManager = %StateManager
 @onready var state_chart: StateChart = %StateChart
+@export var walk_frequency = 0.01
+@export var walk_amplitude = 0.1
 
 var on_contact = false 
 
 func _ready():
 	un_possess()
 	state_chart.set_expression_property("on_contact", on_contact)
+	
+	safe_margin = 0.05
 
 func _process(_delta: float) -> void:
 	%PapelitoCam.global_rotation = 0
@@ -21,6 +25,14 @@ func _physics_process(delta: float) -> void:
 	else:
 		on_contact = false
 	state_chart.set_expression_property("on_contact", on_contact)
+	
+	# Skew character periodically to simulate walking.
+	if velocity:
+		%Art.skew = sin(Time.get_ticks_msec()*walk_frequency) * walk_amplitude
+		%Art.rotation = -skew
+	else:
+		lerp(%Art.skew, 0., Time.get_ticks_msec())
+		lerp(%Art.rotation, 0., Time.get_ticks_msec())
 
 func possess():
 	cast_to_floor()

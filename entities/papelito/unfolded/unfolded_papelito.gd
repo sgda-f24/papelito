@@ -1,8 +1,6 @@
 # class for unfolded form of papelito
 extends Possess
 
-@export var walk_frequency = 0.05
-@export var walk_amplitude = 0.1
 @export var speed = 300.0
 @export var jump = -500.0
 
@@ -13,8 +11,7 @@ var prev_velocity = Vector2()
 func _ready() -> void:
 	super._ready()
 	
-	safe_margin = 0.04
-
+	safe_margin = 0.1
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	# Add the gravity.
@@ -33,20 +30,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, speed)
 
-	# Skew character periodically to simulate walking.
-	if velocity:
-		if direction != prev_direction or prev_velocity != velocity:
-			distance_travelled = 0
-			%Art.skew = 0
-			%Art.rotation = 0
-		prev_direction = direction
-		prev_velocity = velocity
-		distance_travelled += velocity.length() * delta
-		%Art.skew = sin(distance_travelled*direction * walk_frequency) * walk_amplitude 
-		%Art.rotation = -skew
-	else:
-		%Art.skew = 0
-		%Art.rotation = 0
 
 	move_and_slide()
 

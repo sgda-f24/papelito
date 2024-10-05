@@ -20,6 +20,7 @@ func _physics_process(delta: float) -> void:
 	
 	var collision = get_last_slide_collision()
 	if collision:
+		state_manager.input_buffer.clear
 		gravity_velocity = 0
 		
 		if not is_ghost_collision(up_vector, collision.get_normal()):
@@ -29,7 +30,8 @@ func _physics_process(delta: float) -> void:
 		
 		if did_input("jump"):
 			jump_velocity += up_vector * jump
-			
+			state_manager.input_buffer.clear
+		
 	else:
 		last_up_vector = Vector2.ZERO
 
@@ -57,14 +59,14 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func update_frame_of_reference(collision_normal):
+	print("Change of reference: ", collision_normal)
 	up_vector = collision_normal
 	right_vector = -up_vector.orthogonal()
-	%Art.global_rotation = right_vector.angle()
+	global_rotation = right_vector.angle()
 	
 	var was_on_air = last_up_vector.is_equal_approx(Vector2.ZERO)
 	var left_wall = up_vector.is_equal_approx(Vector2.RIGHT)
 		
-	last_up_vector = up_vector
 	jump_velocity = Vector2.ZERO
 
 func is_ghost_collision(vec, maybe_ghost, epsilon = 0.01):

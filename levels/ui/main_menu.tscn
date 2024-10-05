@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://b63g2rmkwaj4g"]
+[gd_scene load_steps=3 format=3 uid="uid://dkf57xjdkvkw5"]
 
 [ext_resource type="Script" path="res://addons/PackedUi/Code/main_menu.gd" id="1_ke8wb"]
 [ext_resource type="Theme" uid="uid://cpqt1hqsijy37" path="res://addons/PackedUi/default_theme.tres" id="2_st8yw"]

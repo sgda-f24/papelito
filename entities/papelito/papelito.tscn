@@ -81,6 +81,7 @@ unique_name_in_owner = true
 
 [node name="Mouse" parent="." instance=ExtResource("5_ue8q7")]
 unique_name_in_owner = true
+jump = 600.0
 
 [node name="BossScissor" parent="." instance=ExtResource("10_mqlev")]
 show_behind_parent = true

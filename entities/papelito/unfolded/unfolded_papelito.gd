@@ -52,6 +52,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_unfolded_state_entered() -> void:
 	possess()
+	%Art.visible = true
 	
 
 func _on_unfolded_state_exited() -> void:

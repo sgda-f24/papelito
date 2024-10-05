@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkw5cvxq4miek"]
+
+[ext_resource type="Script" path="res://entities/scissor/scissor_2d.gd" id="1_3t3ck"]
+[ext_resource type="PackedScene" uid="uid://cvq17ui4ous11" path="res://entities/scissor/tailors_scissors.glb" id="2_e88mk"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_tpl75"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Curve3D" id="Curve3D_4urco"]
+bake_interval = 512.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_d0t8r"]
+flip_faces = true
+size = Vector3(1200, 400, 1200)
+
+[node name="Scissors" type="Node2D"]
+script = ExtResource("1_3t3ck")
+
+[node name="Texture Capture" type="Sprite2D" parent="."]
+z_index = -1
+texture = SubResource("ViewportTexture_tpl75")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+msaa_3d = 3
+debug_draw = 2
+size = Vector2i(1200, 700)
+
+[node name="ScissorsModel" parent="SubViewport" instance=ExtResource("2_e88mk")]
+unique_name_in_owner = true
+transform = Transform3D(0.878817, -0.477159, 0, 0.477159, 0.878817, 0, 0, 0, 1, 200, 150, 0)
+
+[node name="Sketchfab_model" parent="SubViewport/ScissorsModel" index="0"]
+transform = Transform3D(50, 0, 0, 0, -2.18557e-06, 50, 0, -50, -2.18557e-06, -14.247, -11.5328, 0)
+
+[node name="1_high" parent="SubViewport/ScissorsModel/Sketchfab_model/353ba5108f494617a6e9a40ef4e3da64_fbx/Object_2/RootNode" index="0"]
+transform = Transform3D(100, 8.73115e-09, 3.81651e-16, 0, -4.37114e-06, 100, 8.73115e-09, -100, -4.37114e-06, 28.666, 24.019, 0.00775103)
+
+[node name="2_high" parent="SubViewport/ScissorsModel/Sketchfab_model/353ba5108f494617a6e9a40ef4e3da64_fbx/Object_2/RootNode" index="1"]
+transform = Transform3D(100, -3.49246e-08, -1.5266e-15, 0, -4.37114e-06, 100, -3.49246e-08, -100, -4.37114e-06, 28.666, 24.019, 0.00775104)
+
+[node name="3_high" parent="SubViewport/ScissorsModel/Sketchfab_model/353ba5108f494617a6e9a40ef4e3da64_fbx/Object_2/RootNode" index="2"]
+transform = Transform3D(100, -3.49246e-08, -1.5266e-15, 0, -4.37114e-06, 100, -3.49246e-08, -100, -4.37114e-06, 28.666, 24.019, 0.00775104)
+
+[node name="AnimationPlayer" parent="SubViewport/ScissorsModel" index="1"]
+playback_auto_capture_ease_type = 3
+movie_quit_on_finish = true
+
+[node name="Wander" type="Path3D" parent="SubViewport"]
+unique_name_in_owner = true
+curve = SubResource("Curve3D_4urco")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="SubViewport/Wander"]
+transform = Transform3D(0.999925, 0, 0, 0, 0.999939, 0, 0, 0, 0.999927, 0, 0, 0)
+use_model_front = true
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0113983, 1.0414, 399.826)
+fov = 90.0
+size = 1200.0
+
+[node name="Room" type="MeshInstance3D" parent="SubViewport"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -600)
+visible = false
+mesh = SubResource("BoxMesh_d0t8r")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 849.975)
+light_energy = 5.962
+light_angular_distance = 18.0
+
+[editable path="SubViewport/ScissorsModel"]

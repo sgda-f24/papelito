@@ -3,3 +3,5 @@
 /android/
 /addons/*
 !/addons/godot_state_charts/
+/releases/
+*.tmp

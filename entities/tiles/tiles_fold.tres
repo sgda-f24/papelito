@@ -1,0 +1,17 @@
+[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://dbb4p8gjokgo3"]
+
+[ext_resource type="PackedScene" uid="uid://bt7gjbreprl6" path="res://entities/tiles/diamond/diamond.tscn" id="1_lna0w"]
+[ext_resource type="PackedScene" uid="uid://bmucffnah3o1e" path="res://entities/tiles/edge/edge.tscn" id="2_056h1"]
+[ext_resource type="PackedScene" uid="uid://b43jmsyw2vvgy" path="res://entities/tiles/corner/corner.tscn" id="3_mhron"]
+[ext_resource type="PackedScene" uid="uid://df6q4o2jl8jbn" path="res://entities/tiles/concave/concave.tscn" id="4_pulus"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_tyvdt"]
+scenes/1/scene = ExtResource("1_lna0w")
+scenes/2/scene = ExtResource("2_056h1")
+scenes/3/scene = ExtResource("3_mhron")
+scenes/4/scene = ExtResource("4_pulus")
+
+[resource]
+tile_shape = 1
+tile_size = Vector2i(512, 512)
+sources/0 = SubResource("TileSetScenesCollectionSource_tyvdt")

@@ -1,10 +1,104 @@
-[gd_scene load_steps=2 format=3 uid="uid://pfcfrt16abmg"]
+[gd_scene load_steps=8 format=3 uid="uid://pfcfrt16abmg"]
+
+[ext_resource type="Shader" path="res://entities/papelito/unfolded/eye_wind.gdshader" id="1_8e3mw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8xgjv"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ufk2r"]
+viewport_path = NodePath("FirstFold/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kogpr"]
+shader = ExtResource("1_8e3mw")
+
+[sub_resource type="Gradient" id="Gradient_jt5cd"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.59434, 0.603774)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_3un1o"]
+gradient = SubResource("Gradient_jt5cd")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7b0p5"]
+shader = ExtResource("1_8e3mw")
 
 [node name="FoldingTransition" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_8xgjv")
 
-[node name="SubViewport" type="SubViewport" parent="."]
+[node name="FirstFold" type="Sprite2D" parent="."]
+texture = SubResource("ViewportTexture_ufk2r")
 
-[node name="Camera2D" type="Camera2D" parent="SubViewport"]
+[node name="SubViewport" type="SubViewport" parent="FirstFold"]
+transparent_bg = true
+size = Vector2i(1024, 1024)
+
+[node name="art" type="Node2D" parent="FirstFold/SubViewport"]
+position = Vector2(54.275, -94.82)
+scale = Vector2(2, 2)
+
+[node name="Polygon2D" type="Polygon2D" parent="FirstFold/SubViewport/art"]
+polygon = PackedVector2Array(128, 192, 320, 192, 192, 512, 0, 512)
+
+[node name="Polygon2D2" type="Polygon2D" parent="FirstFold/SubViewport/art"]
+color = Color(0.55562, 0.55562, 0.55562, 1)
+polygon = PackedVector2Array(320, 192, 384, 512, 192, 512)
+
+[node name="Node2D" type="Node2D" parent="FirstFold/SubViewport/art"]
+position = Vector2(169.265, 372.675)
+rotation = 0.0872665
+
+[node name="RightEye" type="Polygon2D" parent="FirstFold/SubViewport/art/Node2D"]
+material = SubResource("ShaderMaterial_kogpr")
+position = Vector2(-16, -64)
+texture = SubResource("GradientTexture2D_3un1o")
+polygon = PackedVector2Array(-4, -4, -4, 4, 4, 4, 4, -4)
+uv = PackedVector2Array(4.81609, 3.32816, 4.81609, 251.328, 252.816, 251.328, 252.816, 3.32816)
+
+[node name="LeftEye" type="Polygon2D" parent="FirstFold/SubViewport/art/Node2D"]
+material = SubResource("ShaderMaterial_7b0p5")
+position = Vector2(16, -64)
+color = Color(0, 0, 0, 1)
+texture = SubResource("GradientTexture2D_3un1o")
+polygon = PackedVector2Array(-4, -4, -4, 4, 4, 4, 4, -4)
+uv = PackedVector2Array(4.81571, 3.32819, 4.81571, 251.328, 252.816, 251.328, 252.816, 3.32819)
+
+[node name="Second" type="Sprite2D" parent="."]
+visible = false
+texture = SubResource("ViewportTexture_ufk2r")
+
+[node name="SubViewport" type="SubViewport" parent="Second"]
+transparent_bg = true
+size = Vector2i(1024, 1024)
+
+[node name="art" type="Node2D" parent="Second/SubViewport"]
+position = Vector2(54.275, -94.82)
+scale = Vector2(2, 2)
+
+[node name="Polygon2D" type="Polygon2D" parent="Second/SubViewport/art"]
+polygon = PackedVector2Array(228.863, 175.41, 324.862, 399.41, 4.8625, 399.41)
+
+[node name="Polygon2D2" type="Polygon2D" parent="Second/SubViewport/art"]
+color = Color(0.837469, 0.837469, 0.837469, 1)
+polygon = PackedVector2Array(388.862, 239.41, 324.862, 399.41, 228.863, 175.41)
+
+[node name="Node2D" type="Node2D" parent="Second/SubViewport/art"]
+position = Vector2(169.265, 372.675)
+rotation = 0.0872665
+
+[node name="RightEye" type="Polygon2D" parent="Second/SubViewport/art/Node2D"]
+material = SubResource("ShaderMaterial_kogpr")
+position = Vector2(-16, -64)
+texture = SubResource("GradientTexture2D_3un1o")
+polygon = PackedVector2Array(-4, -4, -4, 4, 4, 4, 4, -4)
+uv = PackedVector2Array(4.81609, 3.32816, 4.81609, 251.328, 252.816, 251.328, 252.816, 3.32816)
+
+[node name="LeftEye" type="Polygon2D" parent="Second/SubViewport/art/Node2D"]
+material = SubResource("ShaderMaterial_7b0p5")
+position = Vector2(16, -64)
+color = Color(0, 0, 0, 1)
+texture = SubResource("GradientTexture2D_3un1o")
+polygon = PackedVector2Array(-4, -4, -4, 4, 4, 4, 4, -4)
+uv = PackedVector2Array(4.81571, 3.32819, 4.81571, 251.328, 252.816, 251.328, 252.816, 3.32819)

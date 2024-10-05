@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkf57xjdkvkw5"]
+
+[ext_resource type="Script" path="res://addons/PackedUi/Code/main_menu.gd" id="1_ke8wb"]
+[ext_resource type="Theme" uid="uid://cpqt1hqsijy37" path="res://addons/PackedUi/default_theme.tres" id="2_st8yw"]
+
+[node name="MainMenu" type="Control" groups=["Credits", "MainMenu", "OptionsMenu", "PauseMenu", "PlayerUI", "ResultScreen"]]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 738.0
+script = ExtResource("1_ke8wb")
+menu_options = Array[String](["Play", "Settings", "Credits"])
+
+[node name="background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.242052, 0.18342, 0.265668, 1)
+
+[node name="vbox1" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="game_title_label" type="RichTextLabel" parent="vbox1"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_st8yw")
+bbcode_enabled = true
+text = "[center]Game Title Here[/center]"
+fit_content = true
+scroll_active = false
+
+[node name="buttons_hbox" type="HBoxContainer" parent="vbox1"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="vbox1/buttons_hbox"]
+layout_mode = 2
+text = "Buenas
+"
+
+[node name="menu_button_vbox" type="VBoxContainer" parent="vbox1/buttons_hbox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/separation = 45

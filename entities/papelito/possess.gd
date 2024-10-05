@@ -35,11 +35,11 @@ func _physics_process(delta: float) -> void:
 		lerp(%Art.rotation, 0., Time.get_ticks_msec())
 
 func possess():
-	cast_to_floor()
 	visible = true
 	process_mode = PROCESS_MODE_INHERIT
 	%PapelitoCam.reparent(self)
 	%PapelitoCam.transform = Transform2D.IDENTITY
+	cast_to_floor()
 
 func un_possess():
 	get_parent().transform = self.global_transform

@@ -10,6 +10,7 @@ height = 142.0
 [node name="Mouse" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_l3in3")
+speed = 800.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_7oggh")

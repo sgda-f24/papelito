@@ -59,7 +59,6 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func update_frame_of_reference(collision_normal):
-	print("Change of reference: ", collision_normal)
 	up_vector = collision_normal
 	right_vector = -up_vector.orthogonal()
 	global_rotation = right_vector.angle()

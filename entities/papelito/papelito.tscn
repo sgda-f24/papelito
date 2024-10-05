@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cimaykirqo303"]
+[gd_scene load_steps=13 format=3 uid="uid://cimaykirqo303"]
 
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_b6q42"]
 [ext_resource type="Script" path="res://entities/papelito/state_manager.gd" id="3_nps4l"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_eytkx"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="6_na5v8"]
 [ext_resource type="PackedScene" uid="uid://dkw5cvxq4miek" path="res://entities/scissor/scissor_2d.tscn" id="7_w5hfv"]
+[ext_resource type="PackedScene" uid="uid://ctaf7lxdmq1yc" path="res://entities/papelito/transition/folding.tscn" id="10_q2wum"]
 
 [sub_resource type="Resource" id="Resource_lnobj"]
 script = ExtResource("6_na5v8")
@@ -66,10 +67,16 @@ scale = Vector2(4, 4)
 
 [node name="Unfolded" parent="." instance=ExtResource("4_n7ys7")]
 unique_name_in_owner = true
+speed = 650.0
+jump = -850.0
 
 [node name="Mouse" parent="." instance=ExtResource("5_ue8q7")]
 unique_name_in_owner = true
 walk_length = 1.5
+
+[node name="Folding" parent="." instance=ExtResource("10_q2wum")]
+visible = false
+scale = Vector2(0.25, 0.25)
 
 [connection signal="state_input" from="StateChart/Root" to="StateChart/Root/StateManager" method="_on_root_state_input"]
 [connection signal="state_entered" from="StateChart/Root/Unfolded" to="ScissorsBoss" method="_on_unfolded_state_entered"]

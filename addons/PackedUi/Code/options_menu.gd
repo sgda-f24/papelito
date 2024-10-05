@@ -105,8 +105,8 @@ var new_language:int
 var changes_made:bool = false
 
 # Loacalition string ids
-var resize_title:String = "resize_title"
-var resize_text:String = "resize_text"
+var resize_title:String = "Are you sure you want to resize the screen?"
+var resize_text:String = ""
 var changes_title:String = "changes_title"
 var changes_text:String = "changes_text"
 
@@ -330,7 +330,7 @@ func _popup_result(_id:String, _result:bool) -> void:
 				UI.ToggleUi.emit(UI.previous_menu, true, id)
 
 			_:
-				if display_language_options:
+				if display_language_options and loaded_locales.size() > 0:
 					TranslationServer.set_locale(loaded_locales[current_language])
 					language_options.select_value(current_language)
 				if display_display_options:

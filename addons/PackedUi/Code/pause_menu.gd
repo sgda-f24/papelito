@@ -63,4 +63,5 @@ func _back_btn_pressed() -> void:
 
 func _main_menu_btn_pressed() -> void:
 	UI.ReturnToMainMenu.emit()
+	get_tree().paused = false
 	UI.ToggleUi.emit("main_menu", true, id)

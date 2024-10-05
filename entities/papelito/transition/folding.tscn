@@ -1,0 +1,43 @@
+[gd_scene load_steps=9 format=3 uid="uid://ctaf7lxdmq1yc"]
+
+[ext_resource type="Texture2D" uid="uid://d3ytpefbwa2dw" path="res://entities/papelito/transition/0.png" id="1_lr87v"]
+[ext_resource type="Texture2D" uid="uid://dmb7pq0stb7iu" path="res://entities/papelito/transition/6.png" id="2_tvni4"]
+[ext_resource type="Texture2D" uid="uid://bnlbwdg1dwchb" path="res://entities/papelito/transition/5.png" id="3_t3r24"]
+[ext_resource type="Texture2D" uid="uid://cb1avlxbafkgd" path="res://entities/papelito/transition/4.png" id="4_xrmh5"]
+[ext_resource type="Texture2D" uid="uid://2agpyh1skkpn" path="res://entities/papelito/transition/3.png" id="5_0iox7"]
+[ext_resource type="Texture2D" uid="uid://c2ybfxjekhyle" path="res://entities/papelito/transition/2.png" id="6_6b5ds"]
+[ext_resource type="Texture2D" uid="uid://dxac5js5jgj3i" path="res://entities/papelito/transition/1.png" id="7_m8vty"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_isa0s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_lr87v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_m8vty")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_6b5ds")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0iox7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_xrmh5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_t3r24")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_tvni4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[node name="Folding" type="AnimatedSprite2D"]
+position = Vector2(-1, 0)
+sprite_frames = SubResource("SpriteFrames_isa0s")
+frame_progress = 0.729056

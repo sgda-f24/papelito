@@ -1,13 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bt4m5glv63l8p"]
+[gd_scene load_steps=9 format=3 uid="uid://bt4m5glv63l8p"]
 
 [ext_resource type="Script" path="res://entities/papelito/unfolded/unfolded_papelito.gd" id="1_vycwu"]
-[ext_resource type="Shader" path="res://entities/papelito/unfolded/wind.gdshader" id="2_bvyih"]
 [ext_resource type="Shader" path="res://entities/papelito/unfolded/eye_wind.gdshader" id="3_k88af"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1n213"]
-shader = ExtResource("2_bvyih")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qnnn1"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_c8g1b"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1s02c"]
 shader = ExtResource("3_k88af")
 
 [sub_resource type="Gradient" id="Gradient_1yx24"]
@@ -22,42 +20,42 @@ height = 256
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1s02c"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c8g1b"]
 shader = ExtResource("3_k88af")
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wh6c1"]
-radius = 247.0
-height = 754.0
+radius = 386.0
+height = 794.0
 
 [node name="Unfolded" type="CharacterBody2D"]
 script = ExtResource("1_vycwu")
 
 [node name="Art" type="Node2D" parent="."]
 unique_name_in_owner = true
-scale = Vector2(3, 3)
+scale = Vector2(6, 6)
 
-[node name="Body" type="Polygon2D" parent="Art"]
-material = SubResource("ShaderMaterial_1n213")
-scale = Vector2(2.43262, 2.84342)
-color = Color(0.9, 0.9, 0.9, 1)
-antialiased = true
-polygon = PackedVector2Array(-32.8864, -45.0162, -19.7318, -45.0162, -6.57727, -45.0162, 6.57727, -45.0162, 19.7318, -45.0162, 32.8864, -45.0162, 32.8864, -33.7622, 32.8864, -22.5081, 32.8864, -11.2541, 32.8864, 0, 32.8864, 11.2541, 32.8864, 22.5081, 32.8864, 33.7622, 32.8864, 45.0162, 19.7318, 45.0162, 6.57727, 45.0162, -6.57727, 45.0162, -19.7318, 45.0162, -32.8864, 45.0162, -32.8864, 33.7622, -32.8864, 22.5081, -32.8864, 11.2541, -32.8864, 0, -32.8864, -11.2541, -32.8864, -22.5081, -32.8864, -33.7622)
-uv = PackedVector2Array(-32.8864, -45.0162, -19.7318, -45.0162, -6.57727, -45.0162, 6.57727, -45.0162, 19.7318, -45.0162, 32.8864, -45.0162, 32.8864, -33.7622, 32.8864, -22.5081, 32.8864, -11.2541, 32.8864, 0, 32.8864, 11.2541, 32.8864, 22.5081, 32.8864, 33.7622, 32.8864, 45.0162, 19.7318, 45.0162, 6.57727, 45.0162, -6.57727, 45.0162, -19.7318, 45.0162, -32.8864, 45.0162, -32.8864, 33.7622, -32.8864, 22.5081, -32.8864, 11.2541, -32.8864, 0, -32.8864, -11.2541, -32.8864, -22.5081, -32.8864, -33.7622)
+[node name="Polygon2D" type="Polygon2D" parent="Art"]
+material = SubResource("ShaderMaterial_qnnn1")
+scale = Vector2(0.333333, 0.333333)
+polygon = PackedVector2Array(-200, -200, 200, -200, 200, 200, -200, 200)
 
-[node name="LeftEye" type="Polygon2D" parent="Art"]
+[node name="Eyes" type="Node2D" parent="Art"]
+position = Vector2(0, 50)
+
+[node name="RightEye" type="Polygon2D" parent="Art/Eyes"]
+material = SubResource("ShaderMaterial_1s02c")
+position = Vector2(-16, -64)
+texture = SubResource("GradientTexture2D_n6lo4")
+polygon = PackedVector2Array(-4, -4, -4, 4, 4, 4, 4, -4)
+uv = PackedVector2Array(4.81609, 3.32816, 4.81609, 251.328, 252.816, 251.328, 252.816, 3.32816)
+
+[node name="LeftEye" type="Polygon2D" parent="Art/Eyes"]
 material = SubResource("ShaderMaterial_c8g1b")
 position = Vector2(16, -64)
 color = Color(0, 0, 0, 1)
 texture = SubResource("GradientTexture2D_n6lo4")
 polygon = PackedVector2Array(-4, -4, -4, 4, 4, 4, 4, -4)
 uv = PackedVector2Array(4.81571, 3.32819, 4.81571, 251.328, 252.816, 251.328, 252.816, 3.32819)
-
-[node name="RightEye" type="Polygon2D" parent="Art"]
-material = SubResource("ShaderMaterial_1s02c")
-position = Vector2(-16, -64)
-texture = SubResource("GradientTexture2D_n6lo4")
-polygon = PackedVector2Array(-4, -4, -4, 4, 4, 4, 4, -4)
-uv = PackedVector2Array(4.81609, 3.32816, 4.81609, 251.328, 252.816, 251.328, 252.816, 3.32816)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_wh6c1")

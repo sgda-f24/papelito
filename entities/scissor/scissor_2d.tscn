@@ -28,7 +28,7 @@ size = Vector2i(1200, 700)
 
 [node name="ScissorsModel" parent="SubViewport" instance=ExtResource("2_e88mk")]
 unique_name_in_owner = true
-transform = Transform3D(0.878817, -0.477159, 0, 0.477159, 0.878817, 0, 0, 0, 1, 200, 150, 0)
+transform = Transform3D(0.878817, -0.477159, 0, 0.477159, 0.878817, 0, 0, 0, 1, 270, 170, 0)
 
 [node name="Sketchfab_model" parent="SubViewport/ScissorsModel" index="0"]
 transform = Transform3D(50, 0, 0, 0, -2.18557e-06, 50, 0, -50, -2.18557e-06, -14.247, -11.5328, 0)

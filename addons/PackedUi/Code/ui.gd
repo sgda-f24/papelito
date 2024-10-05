@@ -42,7 +42,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	size_timer += delta
 
-
 func _get_window_size(_current:Vector2i) -> Vector2i:
 	if _current != Vector2i(ProjectSettings.get_setting("display/window/size/viewport_width"), ProjectSettings.get_setting("display/window/size/viewport_height")):
 		WindowResized.emit(Vector2i(ProjectSettings.get_setting("display/window/size/viewport_width"), ProjectSettings.get_setting("display/window/size/viewport_height")))
@@ -71,3 +70,7 @@ func _get_all_children(_parent:Node) -> Array:
 		if child.get_children().size() > 0:
 			children.append_array(_get_all_children(child))
 	return children
+
+
+func _on_window_resized(_value: Vector2i) -> void:
+	print(_value)

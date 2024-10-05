@@ -35,8 +35,8 @@ func _ready() -> void:
 
 func _set_game_title(_value:String = "") -> void:
 	if get_name_from_properties:
-		UI.game_name = ProjectSettings.get_setting("application/config/name")
-		game_title_label.text = "[center]%s[/center]" % UI.game_name
+		UI.game_name = "[center]%s[/center]" % ProjectSettings.get_setting("application/config/name")
+		game_title_label.text = UI.game_name
 	else:
 		game_title_label.text = _value
 		UI.game_name = _value
@@ -90,3 +90,4 @@ func _toggle_control(_id:String, _value:bool, _previous:String = "") -> void:
 
 func button_pressed(_id:String) -> void:
 	UI.ButtonPressed.emit(_id.to_lower(), id)
+	UI.ToggleUi.emit(_id.to_lower(), true, id)

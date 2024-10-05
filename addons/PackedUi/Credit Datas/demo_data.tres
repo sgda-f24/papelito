@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CreditSectionData" load_steps=2 format=3 uid="uid://cj8cddje77ep4"]
+
+[ext_resource type="Script" path="res://addons/PackedUi/Code/credits_section_data.gd" id="1_3lnsr"]
+
+[resource]
+script = ExtResource("1_3lnsr")
+section_name = "[center]created by[/center]"
+text_section = "credits_text_1"
+logo_images = Array[Resource]([])
+list_of_names = Array[String](["Diego", "Emily", "Christopher", "Bryan", "Mauricio"])

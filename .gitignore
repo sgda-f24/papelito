@@ -3,5 +3,6 @@
 /android/
 /addons/*
 !/addons/godot_state_charts/
+!/addons/PackedUi/
 /releases/
 *.tmp

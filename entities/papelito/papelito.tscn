@@ -236,6 +236,8 @@ libraries = {
 "": SubResource("AnimationLibrary_vgahh")
 }
 
+[node name="Node" type="Node" parent="."]
+
 [connection signal="state_input" from="StateChart/Root" to="StateChart/Root/StateManager" method="_on_root_state_input"]
 [connection signal="state_entered" from="StateChart/Root/Unfolded" to="ScissorsBoss" method="_on_unfolded_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Unfolded" to="Unfolded" method="_on_unfolded_state_entered"]

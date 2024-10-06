@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bfvrd7kn3kpid"
+path="res://.godot/imported/Scissors Showdown.mp3-8681b316985a2558f4916ab12ac58560.mp3str"
+
+[deps]
+
+source_file="res://levels/tracks/songs/Scissors Showdown.mp3"
+dest_files=["res://.godot/imported/Scissors Showdown.mp3-8681b316985a2558f4916ab12ac58560.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

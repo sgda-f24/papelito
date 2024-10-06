@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cimaykirqo303"]
+[gd_scene load_steps=27 format=3 uid="uid://cimaykirqo303"]
 
 [ext_resource type="Script" path="res://entities/papelito/papelito.gd" id="1_w6agj"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_b6q42"]
@@ -47,6 +47,59 @@ expression = "on_contact"
 [sub_resource type="Resource" id="Resource_4ddo3"]
 script = ExtResource("6_na5v8")
 expression = "on_contact"
+
+[sub_resource type="Animation" id="Animation_vfj52"]
+resource_name = "folding"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Folding:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Folding")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [&"", 1.0, false],
+"method": &"play"
+}, {
+"args": [],
+"method": &"stop"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_av83t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Folding:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vgahh"]
+_data = {
+"RESET": SubResource("Animation_av83t"),
+"folding": SubResource("Animation_vfj52")
+}
 
 [node name="Papelito" type="Node2D"]
 script = ExtResource("1_w6agj")
@@ -159,7 +212,6 @@ jump = -400.0
 
 [node name="Crane" parent="." instance=ExtResource("11_jtfxy")]
 unique_name_in_owner = true
-glide = -100
 
 [node name="Boat" parent="." instance=ExtResource("12_e41xc")]
 unique_name_in_owner = true
@@ -177,6 +229,12 @@ scale = Vector2(0.503333, 0.5)
 [node name="Kill" parent="." instance=ExtResource("11_knbs4")]
 rotation = 2.39459
 scale = Vector2(2, 4)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_vgahh")
+}
 
 [connection signal="state_input" from="StateChart/Root" to="StateChart/Root/StateManager" method="_on_root_state_input"]
 [connection signal="state_entered" from="StateChart/Root/Unfolded" to="ScissorsBoss" method="_on_unfolded_state_entered"]

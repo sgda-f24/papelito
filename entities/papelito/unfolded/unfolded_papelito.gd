@@ -29,8 +29,6 @@ func _on_unfolded_state_entered() -> void:
 
 func _on_unfolded_state_exited() -> void:
 	un_possess()
-	%Folding.visible = false
-	%Folding.stop()
 	zoom_in()
 
 func zoom_out():
@@ -43,6 +41,4 @@ func zoom_in():
 
 func _on_unfolded_transition_pending(initial_delay: float, remaining_delay: float) -> void:
 	un_possess()
-	if not %Folding.is_playing():
-		%Folding.visible = true
-		%Folding.play()
+	%AnimationPlayer.play("folding")

@@ -10,6 +10,7 @@ height = 256.0
 [node name="Boat" type="CharacterBody2D"]
 collision_layer = 3
 script = ExtResource("1_ht08b")
+water_speed = 200
 spring_constant = 100.0
 damping = 10.0
 

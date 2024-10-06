@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctmthtdljdhqg"]
+
+[ext_resource type="Script" path="res://entities/papelito/crane/crane.gd" id="1_7amdb"]
+[ext_resource type="Texture2D" uid="uid://bgvg1kyu54ixh" path="res://entities/papelito/crane/sgda_gameJam24_crane.png" id="2_jak7o"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wh6c1"]
+radius = 112.0
+height = 224.0
+
+[node name="Crane" type="CharacterBody2D"]
+collision_layer = 3
+script = ExtResource("1_7amdb")
+glide = -10
+
+[node name="Art" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(16, -56)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_jak7o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_wh6c1")

@@ -30,18 +30,45 @@ offset_bottom = 720.0
 script = ExtResource("3_vxaev")
 id = "play"
 
-[node name="Actions" type="Control" parent="PlayerUI"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="VBoxContainer2" type="VBoxContainer" parent="PlayerUI"]
+layout_mode = 1
+offset_left = 100.0
+offset_top = 100.0
+offset_right = 347.0
+offset_bottom = 285.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PlayerUI/Actions"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Label" type="Label" parent="PlayerUI/Actions/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerUI/VBoxContainer2"]
 layout_mode = 2
+theme = ExtResource("2_fnkc2")
+alignment = 1
+
+[node name="Label" type="Label" parent="PlayerUI/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "Unfold to fold into other shapes"
+
+[node name="fold" type="Label" parent="PlayerUI/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "fold = space"
+
+[node name="mouse" type="Label" parent="PlayerUI/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "mouse = z"
+
+[node name="crane" type="Label" parent="PlayerUI/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "crane = c"
+
+[node name="boat" type="Label" parent="PlayerUI/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "boat = b"
+
+[node name="dragon" type="Label" parent="PlayerUI/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "dragon = v"
+
+[node name="return" type="Label" parent="PlayerUI/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+text = "return = r"
 
 [node name="OptionsMenu" type="Control" parent="." groups=["OptionsMenu"]]
 visible = false

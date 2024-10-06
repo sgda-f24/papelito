@@ -1,7 +1,5 @@
 extends Possess
 
-@export var glide = -5
-
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	
@@ -10,10 +8,8 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	# Handle jump.
-	if did_input("jump"):
-		if is_on_floor():
-			velocity.y = jump
-		velocity.y += glide
+	if did_input("jump") and is_on_floor():
+		velocity.y = jump
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -26,9 +22,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func _on_crane_state_entered() -> void:
+func _on_dragon_state_entered() -> void:
 	possess()
 
 
-func _on_crane_state_exited() -> void:
+func _on_dragon_state_exited() -> void:
 	un_possess()

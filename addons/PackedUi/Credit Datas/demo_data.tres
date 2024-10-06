@@ -7,4 +7,4 @@ script = ExtResource("1_3lnsr")
 section_name = "[center]created by[/center]"
 text_section = "credits_text_1"
 logo_images = Array[Resource]([])
-list_of_names = Array[String](["Diego Rodrigues", "Emily Yuan", "Christopher Echols", "Bryan Choo", "Mauricio"])
+list_of_names = Array[String](["Diego Rodrigues", "Emily Yuan", "Christopher Echols", "Bryan Choo", "Mauricio Garcia"])

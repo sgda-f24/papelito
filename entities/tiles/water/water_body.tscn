@@ -10,3 +10,10 @@ color = Color(0.172549, 0.462745, 1, 1)
 texture = ExtResource("2_lj0uy")
 polygon = PackedVector2Array(-256, 0, 0, -256, 256, 0, 63.9995, 192, -64.0005, 192)
 uv = PackedVector2Array(5.66808, 257.546, 256.155, 7.05933, 506.641, 257.546, 318.776, 445.411, 193.532, 445.411)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-256, 0, 0, -256, 256, 0, 63.9995, 192, -64.0005, 192)

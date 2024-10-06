@@ -25,7 +25,7 @@ func _physics_process(delta: float) -> void:
 		jump_velocity = Vector2.ZERO
 		
 		if did_input("jump"):
-			jump_velocity += up_vector * jump
+			jump_velocity += up_vector * -jump
 			state_manager.input_buffer.clear
 		
 	else:

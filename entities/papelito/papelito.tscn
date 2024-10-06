@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cimaykirqo303"]
+[gd_scene load_steps=24 format=3 uid="uid://cimaykirqo303"]
 
 [ext_resource type="Script" path="res://entities/papelito/papelito.gd" id="1_w6agj"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_b6q42"]
@@ -11,17 +11,20 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="6_na5v8"]
 [ext_resource type="PackedScene" uid="uid://dkw5cvxq4miek" path="res://entities/scissor/scissor_2d.tscn" id="7_w5hfv"]
 [ext_resource type="PackedScene" uid="uid://ctaf7lxdmq1yc" path="res://entities/papelito/transition/folding.tscn" id="10_q2wum"]
+[ext_resource type="PackedScene" uid="uid://ctmthtdljdhqg" path="res://entities/papelito/crane/crane.tscn" id="11_jtfxy"]
 [ext_resource type="PackedScene" uid="uid://dv6d0hlaqo5bm" path="res://entities/papelito/kill.tscn" id="11_knbs4"]
+[ext_resource type="PackedScene" uid="uid://b2cl7fbiqek4u" path="res://entities/papelito/boat/boat.tscn" id="12_e41xc"]
+[ext_resource type="PackedScene" uid="uid://cogvf7mon03ti" path="res://entities/papelito/dragon/dragon.tscn" id="13_vkeew"]
 
 [sub_resource type="Resource" id="Resource_lnobj"]
 script = ExtResource("6_na5v8")
 expression = "on_contact"
 
-[sub_resource type="Resource" id="Resource_0pdrp"]
+[sub_resource type="Resource" id="Resource_wwhl1"]
 script = ExtResource("6_na5v8")
 expression = "on_contact"
 
-[sub_resource type="Resource" id="Resource_wwhl1"]
+[sub_resource type="Resource" id="Resource_0pdrp"]
 script = ExtResource("6_na5v8")
 expression = "on_contact"
 
@@ -33,11 +36,11 @@ expression = "on_contact"
 script = ExtResource("6_na5v8")
 expression = "on_contact"
 
-[sub_resource type="Resource" id="Resource_qqukt"]
+[sub_resource type="Resource" id="Resource_nro0i"]
 script = ExtResource("6_na5v8")
 expression = "on_contact"
 
-[sub_resource type="Resource" id="Resource_nro0i"]
+[sub_resource type="Resource" id="Resource_qqukt"]
 script = ExtResource("6_na5v8")
 expression = "on_contact"
 
@@ -70,18 +73,18 @@ event = &"to_mouse"
 guard = SubResource("Resource_lnobj")
 delay_in_seconds = "1.0"
 
-[node name="ToBoat" type="Node" parent="StateChart/Root/Unfolded"]
-script = ExtResource("6_eytkx")
-to = NodePath("../../Boat")
-event = &"to_crane"
-guard = SubResource("Resource_0pdrp")
-delay_in_seconds = "1.0"
-
 [node name="ToCrane" type="Node" parent="StateChart/Root/Unfolded"]
 script = ExtResource("6_eytkx")
 to = NodePath("../../Crane")
 event = &"to_crane"
 guard = SubResource("Resource_wwhl1")
+delay_in_seconds = "1.0"
+
+[node name="ToBoat" type="Node" parent="StateChart/Root/Unfolded"]
+script = ExtResource("6_eytkx")
+to = NodePath("../../Boat")
+event = &"to_boat"
+guard = SubResource("Resource_0pdrp")
 delay_in_seconds = "1.0"
 
 [node name="ToDragon" type="Node" parent="StateChart/Root/Unfolded"]
@@ -101,16 +104,6 @@ event = &"to_unfold"
 guard = SubResource("Resource_jalhw")
 delay_in_seconds = "0.0"
 
-[node name="Boat" type="Node" parent="StateChart/Root"]
-script = ExtResource("4_yfr22")
-
-[node name="Transition" type="Node" parent="StateChart/Root/Boat"]
-script = ExtResource("6_eytkx")
-to = NodePath("../../Unfolded")
-event = &"to_unfold"
-guard = SubResource("Resource_qqukt")
-delay_in_seconds = "0.0"
-
 [node name="Crane" type="Node" parent="StateChart/Root"]
 script = ExtResource("4_yfr22")
 
@@ -119,6 +112,16 @@ script = ExtResource("6_eytkx")
 to = NodePath("../../Unfolded")
 event = &"to_unfold"
 guard = SubResource("Resource_nro0i")
+delay_in_seconds = "0.0"
+
+[node name="Boat" type="Node" parent="StateChart/Root"]
+script = ExtResource("4_yfr22")
+
+[node name="Transition" type="Node" parent="StateChart/Root/Boat"]
+script = ExtResource("6_eytkx")
+to = NodePath("../../Unfolded")
+event = &"to_unfold"
+guard = SubResource("Resource_qqukt")
 delay_in_seconds = "0.0"
 
 [node name="Dragon" type="Node" parent="StateChart/Root"]
@@ -152,13 +155,18 @@ collision_layer = 3
 unique_name_in_owner = true
 collision_layer = 3
 collision_mask = 3
-walk_frequency = null
-walk_amplitude = null
-jump = null
+jump = -400.0
 
-[node name="Boat" parent="." instance=ExtResource("4_n7ys7")]
+[node name="Crane" parent="." instance=ExtResource("11_jtfxy")]
 unique_name_in_owner = true
-collision_layer = 3
+glide = -100
+
+[node name="Boat" parent="." instance=ExtResource("12_e41xc")]
+unique_name_in_owner = true
+speed = 100.0
+
+[node name="Dragon" parent="." instance=ExtResource("13_vkeew")]
+unique_name_in_owner = true
 
 [node name="Folding" parent="." instance=ExtResource("10_q2wum")]
 unique_name_in_owner = true
@@ -178,3 +186,9 @@ scale = Vector2(2, 4)
 [connection signal="transition_pending" from="StateChart/Root/Unfolded" to="Unfolded" method="_on_unfolded_transition_pending"]
 [connection signal="state_entered" from="StateChart/Root/Mouse" to="Mouse" method="_on_mouse_state_entered"]
 [connection signal="state_exited" from="StateChart/Root/Mouse" to="Mouse" method="_on_mouse_state_exited"]
+[connection signal="state_entered" from="StateChart/Root/Crane" to="Crane" method="_on_crane_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/Crane" to="Crane" method="_on_crane_state_exited"]
+[connection signal="state_entered" from="StateChart/Root/Boat" to="Boat" method="_on_boat_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/Boat" to="Boat" method="_on_boat_state_exited"]
+[connection signal="state_entered" from="StateChart/Root/Dragon" to="Dragon" method="_on_dragon_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/Dragon" to="Dragon" method="_on_dragon_state_exited"]

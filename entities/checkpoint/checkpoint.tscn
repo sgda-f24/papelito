@@ -1,14 +1,15 @@
-[gd_scene load_steps=17 format=3 uid="uid://bynumx8dhbrk2"]
+[gd_scene load_steps=18 format=3 uid="uid://bynumx8dhbrk2"]
 
 [ext_resource type="Texture2D" uid="uid://fhrlp0qnvf4f" path="res://entities/checkpoint/book_sheet.png" id="1_3p5vc"]
 [ext_resource type="Shader" path="res://entities/outline.gdshader" id="1_mpfjk"]
 [ext_resource type="Script" path="res://entities/checkpoint/checkpoint.gd" id="2_ff34g"]
+[ext_resource type="Theme" uid="uid://cpqt1hqsijy37" path="res://addons/PackedUi/default_theme.tres" id="4_lol6m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_miaef"]
 radius = 26.3059
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_chcmq"]
-radius = 240.033
+radius = 104.019
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ubuuc"]
 resource_local_to_scene = true
@@ -114,6 +115,22 @@ unique_name_in_owner = true
 material = SubResource("ShaderMaterial_ubuuc")
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_savdy")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -128.0
+offset_top = -176.0
+offset_right = 138.0
+offset_bottom = -107.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("4_lol6m")
+theme_override_font_sizes/font_size = 50
+text = "checkpoint
+"
 
 [connection signal="body_entered" from="StartAnimation" to="." method="_on_start_animation_body_entered"]
 [connection signal="body_exited" from="StartAnimation" to="." method="_on_start_animation_body_exited"]

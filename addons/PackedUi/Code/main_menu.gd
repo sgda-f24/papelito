@@ -18,6 +18,7 @@ var button_list:Array[MainMenuButton] = []
 
 func _ready() -> void:
 	super()
+	get_tree().paused = true
 	
 	if not UI.is_node_ready():
 		await UI.ready
@@ -91,3 +92,10 @@ func _toggle_control(_id:String, _value:bool, _previous:String = "") -> void:
 func button_pressed(_id:String) -> void:
 	UI.ButtonPressed.emit(_id.to_lower(), id)
 	UI.ToggleUi.emit(_id.to_lower(), true, id)
+
+
+func _on_ui_toggle_ui(id: String, value: bool, previous: String) -> void:
+	if id == "main_menu":
+		get_tree().paused = false
+		Tracks.track_player.stop()
+		Tracks.track_player.play("title")

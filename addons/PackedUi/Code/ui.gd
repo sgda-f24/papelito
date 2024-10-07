@@ -38,6 +38,8 @@ func _ready() -> void:
 	height = ProjectSettings.get_setting("display/window/size/viewport_height")
 	await get_tree().create_timer(0.5).timeout
 
+	UI.ToggleUi.emit("main_menu", true, "")
+
 
 func _physics_process(delta: float) -> void:
 	size_timer += delta

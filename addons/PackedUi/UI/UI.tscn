@@ -590,4 +590,5 @@ libraries = {
 [connection signal="ButtonPressed" from="." to="MainMenu" method="_on_ui_button_pressed"]
 [connection signal="TogglePauseGame" from="." to="PlayerUI" method="_on_ui_toggle_pause_game"]
 [connection signal="ToggleUi" from="." to="PlayerUI" method="_on_ui_toggle_ui"]
+[connection signal="ToggleUi" from="." to="MainMenu" method="_on_ui_toggle_ui"]
 [connection signal="WindowResized" from="." to="." method="_on_window_resized"]

@@ -17,6 +17,7 @@ var on_contact = false
 func _ready():
 	un_possess()
 	state_chart.set_expression_property("on_contact", on_contact)
+	%AnimationPlayer.play("RESET")
 	
 	safe_margin = 0.01
 	
@@ -38,6 +39,15 @@ func _on_folding_finished():
 func update_loc():
 	self.global_position = get_parent().checkpoint.global_position
 	cast_to_floor()
+	
+func _on_player_killed():
+	if get_parent().checkpoint:
+		var transition_scene = load("res://levels/ui/fold_transition.tscn")
+		var instance = transition_scene.instantiate()
+		add_child(instance)
+		# Connect the signal before pausing
+		instance.connect("folding_finished", _on_folding_finished)
+		get_tree().paused = true
 
 func _physics_process(delta: float) -> void:
 	if get_last_slide_collision():

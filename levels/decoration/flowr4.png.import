@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fhrlp0qnvf4f"
-path="res://.godot/imported/book_sheet.png-c9b2650d5b53eafd58ff684477a6b2e1.ctex"
+uid="uid://cmdo4k8o5x5lt"
+path="res://.godot/imported/flowr4.png-a94990289bf825aafc84005a240a8307.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/checkpoint/book_sheet.png"
-dest_files=["res://.godot/imported/book_sheet.png-c9b2650d5b53eafd58ff684477a6b2e1.ctex"]
+source_file="res://levels/decoration/flowr4.png"
+dest_files=["res://.godot/imported/flowr4.png-a94990289bf825aafc84005a240a8307.ctex"]
 
 [params]
 

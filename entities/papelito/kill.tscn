@@ -1,27 +1,60 @@
-[gd_scene load_steps=3 format=3 uid="uid://dv6d0hlaqo5bm"]
+[gd_scene load_steps=7 format=3 uid="uid://dv6d0hlaqo5bm"]
 
+[ext_resource type="Shader" path="res://entities/papelito/kill.gdshader" id="1_6pocj"]
 [ext_resource type="Texture2D" uid="uid://g0iau1j4dy58" path="res://entities/papelito/dash.png" id="1_lvesh"]
 
-[sub_resource type="Curve2D" id="Curve2D_yef3f"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 256, 0, 0, 0, 0, 0, -256, 0)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rerfv"]
+shader = ExtResource("1_6pocj")
+
+[sub_resource type="Animation" id="Animation_mva0x"]
+resource_name = "dash"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D:points")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(0.241485, 1),
+"update": 0,
+"values": [PackedVector2Array(0, 0, -3.05176e-05, 0), PackedVector2Array(8.86777, 0, -3.05176e-05, 0)]
 }
-point_count = 2
+
+[sub_resource type="Animation" id="Animation_nn375"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node2D:points")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [PackedVector2Array(0, 0, -3.05176e-05, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5e2fl"]
+_data = {
+"RESET": SubResource("Animation_nn375"),
+"dash": SubResource("Animation_mva0x")
+}
 
 [node name="Killing Line" type="Node2D"]
 
 [node name="Node2D" type="Line2D" parent="."]
-visible = false
-position = Vector2(-512, 0)
-scale = Vector2(1.005, 200)
-points = PackedVector2Array(1018.91, 0, -3.05176e-05, 0)
+texture_repeat = 2
+material = SubResource("ShaderMaterial_rerfv")
+scale = Vector2(25.26, 100)
+points = PackedVector2Array(0, 0, -3.05176e-05, 0)
 texture = ExtResource("1_lvesh")
-texture_mode = 2
+texture_mode = 1
 
-[node name="Path2D" type="Path2D" parent="."]
-curve = SubResource("Curve2D_yef3f")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(-256, 0)
-rotation = 3.14159
-progress = 512.0
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5e2fl")
+}

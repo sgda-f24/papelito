@@ -17,4 +17,7 @@ func _on_ui_toggle_pause_game(value: bool) -> void:
 
 func _on_ui_toggle_ui(_id: String, value: bool, previous: String) -> void:
 	if _id == "play":
+		Tracks.track_player.play("RESET")
+		Tracks.track_player.stop()
+		Tracks.track_player.play("level1")
 		get_tree().paused = false

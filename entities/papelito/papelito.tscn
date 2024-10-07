@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cimaykirqo303"]
+[gd_scene load_steps=33 format=3 uid="uid://cimaykirqo303"]
 
 [ext_resource type="Script" path="res://entities/papelito/papelito.gd" id="1_w6agj"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_b6q42"]
@@ -12,9 +12,12 @@
 [ext_resource type="PackedScene" uid="uid://dkw5cvxq4miek" path="res://entities/scissor/scissor_2d.tscn" id="7_w5hfv"]
 [ext_resource type="PackedScene" uid="uid://ctaf7lxdmq1yc" path="res://entities/papelito/transition/folding.tscn" id="10_q2wum"]
 [ext_resource type="PackedScene" uid="uid://ctmthtdljdhqg" path="res://entities/papelito/crane/crane.tscn" id="11_jtfxy"]
-[ext_resource type="PackedScene" uid="uid://dv6d0hlaqo5bm" path="res://entities/papelito/kill.tscn" id="11_knbs4"]
 [ext_resource type="PackedScene" uid="uid://b2cl7fbiqek4u" path="res://entities/papelito/boat/boat.tscn" id="12_e41xc"]
 [ext_resource type="PackedScene" uid="uid://cogvf7mon03ti" path="res://entities/papelito/dragon/dragon.tscn" id="13_vkeew"]
+[ext_resource type="Shader" path="res://entities/papelito/kill.gdshader" id="15_lvkq4"]
+[ext_resource type="Texture2D" uid="uid://g0iau1j4dy58" path="res://entities/papelito/dash.png" id="16_5ytbo"]
+[ext_resource type="AudioStream" uid="uid://3tt86ak4qc7f" path="res://levels/tracks/sfx/Fold.mp3" id="17_yggcd"]
+[ext_resource type="AudioStream" uid="uid://das4005wf0rge" path="res://levels/tracks/sfx/Crane Wind.mp3" id="18_expw8"]
 
 [sub_resource type="Resource" id="Resource_lnobj"]
 script = ExtResource("6_na5v8")
@@ -48,6 +51,59 @@ expression = "on_contact"
 script = ExtResource("6_na5v8")
 expression = "on_contact"
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rerfv"]
+shader = ExtResource("15_lvkq4")
+
+[sub_resource type="Animation" id="Animation_av83t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Folding:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Kill/Node2D:points")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [PackedVector2Array(0, 0, -3.05176e-05, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScissorsBoss:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/3/use_blend = true
+
 [sub_resource type="Animation" id="Animation_vfj52"]
 resource_name = "folding"
 tracks/0/type = "value"
@@ -79,26 +135,88 @@ tracks/1/keys = {
 "method": &"stop"
 }]
 }
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("17_yggcd")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
 
-[sub_resource type="Animation" id="Animation_av83t"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_mdw8j"]
+resource_name = "kill"
+length = 6.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Folding:visible")
+tracks/0/path = NodePath("Kill/Node2D:points")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(0.241484, 1),
+"update": 0,
+"values": [PackedVector2Array(0.96, -0.192), PackedVector2Array(2.08, -0.496, -6.28, 1.824)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScissorsBoss:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(5, 6),
+"transitions": PackedFloat32Array(0.210224, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-1500, 1000)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Unfolded")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_on_player_killed"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_1xr6x"]
+resource_name = "crane"
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("18_expw8")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_vgahh"]
 _data = {
 "RESET": SubResource("Animation_av83t"),
-"folding": SubResource("Animation_vfj52")
+"crane": SubResource("Animation_1xr6x"),
+"folding": SubResource("Animation_vfj52"),
+"kill": SubResource("Animation_mdw8j")
 }
 
 [node name="Papelito" type="Node2D"]
@@ -195,30 +313,28 @@ position_smoothing_speed = 10.0
 rotation_smoothing_enabled = true
 rotation_smoothing_speed = 0.001
 
-[node name="ScissorsBoss" parent="." instance=ExtResource("7_w5hfv")]
-unique_name_in_owner = true
-position = Vector2(-328, 80)
-scale = Vector2(4, 4)
-
 [node name="Unfolded" parent="." instance=ExtResource("4_n7ys7")]
 unique_name_in_owner = true
-collision_layer = 3
 
 [node name="Mouse" parent="." instance=ExtResource("5_ue8q7")]
 unique_name_in_owner = true
-collision_layer = 3
-collision_mask = 3
+collision_layer = 1
+speed = 1200.0
 jump = -400.0
 
 [node name="Crane" parent="." instance=ExtResource("11_jtfxy")]
 unique_name_in_owner = true
+collision_layer = 1
 
 [node name="Boat" parent="." instance=ExtResource("12_e41xc")]
 unique_name_in_owner = true
+collision_layer = 1
+water_speed = 2000
 speed = 100.0
 
 [node name="Dragon" parent="." instance=ExtResource("13_vkeew")]
 unique_name_in_owner = true
+collision_layer = 1
 
 [node name="Folding" parent="." instance=ExtResource("10_q2wum")]
 unique_name_in_owner = true
@@ -226,9 +342,21 @@ visible = false
 position = Vector2(3.99999, 5.19753e-05)
 scale = Vector2(0.503333, 0.5)
 
-[node name="Kill" parent="." instance=ExtResource("11_knbs4")]
-rotation = 2.39459
-scale = Vector2(2, 4)
+[node name="ScissorsBoss" parent="." instance=ExtResource("7_w5hfv")]
+unique_name_in_owner = true
+z_index = 1
+scale = Vector2(4, 4)
+
+[node name="Kill" type="Node2D" parent="."]
+
+[node name="Node2D" type="Line2D" parent="Kill"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_rerfv")
+position = Vector2(528, -400)
+scale = Vector2(200, 500)
+points = PackedVector2Array(0, 0, -3.05176e-05, 0)
+texture = ExtResource("16_5ytbo")
+texture_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -236,13 +364,13 @@ libraries = {
 "": SubResource("AnimationLibrary_vgahh")
 }
 
-[node name="Node" type="Node" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="state_input" from="StateChart/Root" to="StateChart/Root/StateManager" method="_on_root_state_input"]
-[connection signal="state_entered" from="StateChart/Root/Unfolded" to="ScissorsBoss" method="_on_unfolded_state_entered"]
 [connection signal="state_entered" from="StateChart/Root/Unfolded" to="Unfolded" method="_on_unfolded_state_entered"]
-[connection signal="state_exited" from="StateChart/Root/Unfolded" to="ScissorsBoss" method="_on_unfolded_state_exited"]
+[connection signal="state_entered" from="StateChart/Root/Unfolded" to="ScissorsBoss" method="_on_unfolded_state_entered"]
 [connection signal="state_exited" from="StateChart/Root/Unfolded" to="Unfolded" method="_on_unfolded_state_exited"]
+[connection signal="state_exited" from="StateChart/Root/Unfolded" to="ScissorsBoss" method="_on_unfolded_state_exited"]
 [connection signal="transition_pending" from="StateChart/Root/Unfolded" to="Unfolded" method="_on_unfolded_transition_pending"]
 [connection signal="state_entered" from="StateChart/Root/Mouse" to="Mouse" method="_on_mouse_state_entered"]
 [connection signal="state_exited" from="StateChart/Root/Mouse" to="Mouse" method="_on_mouse_state_exited"]

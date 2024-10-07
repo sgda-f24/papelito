@@ -74,3 +74,7 @@ func _get_all_children(_parent:Node) -> Array:
 
 func _on_window_resized(_value: Vector2i) -> void:
 	print(_value)
+
+
+func _on_button_pressed(id: String, from: String) -> void:
+	%AnimationPlayer.play("button_pressed")

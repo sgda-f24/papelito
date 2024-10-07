@@ -7,29 +7,10 @@
 [ext_resource type="AudioStream" uid="uid://k3sm22i221w1" path="res://levels/tracks/songs/Scissors Encounter.mp3" id="5_s5spr"]
 [ext_resource type="AudioStream" uid="uid://bfvrd7kn3kpid" path="res://levels/tracks/songs/Scissors Showdown.mp3" id="6_fhuj0"]
 
-[sub_resource type="Animation" id="Animation_3eymw"]
-resource_name = "title"
-length = 16.5
-loop_mode = 1
-tracks/0/type = "audio"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AudioStreamPlayer")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("2_p1x4p")
-}],
-"times": PackedFloat32Array(0)
-}
-tracks/0/use_blend = true
-
 [sub_resource type="Animation" id="Animation_2myuv"]
 resource_name = "level1"
 length = 75.0
+loop_mode = 1
 tracks/0/type = "audio"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -103,6 +84,26 @@ tracks/0/keys = {
 }
 tracks/0/use_blend = true
 
+[sub_resource type="Animation" id="Animation_3eymw"]
+resource_name = "title"
+length = 16.5
+loop_mode = 1
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AudioStreamPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_p1x4p")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/0/use_blend = true
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_als21"]
 _data = {
 "level1": SubResource("Animation_2myuv"),
@@ -122,3 +123,4 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -28.766

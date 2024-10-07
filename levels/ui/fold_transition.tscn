@@ -5,7 +5,6 @@
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_lu78x"]
 scenes/5/scene = ExtResource("2_oh1dv")
-scenes/5/display_placeholder = ExtResource("2_oh1dv")
 
 [sub_resource type="TileSet" id="TileSet_el1x6"]
 tile_shape = 1

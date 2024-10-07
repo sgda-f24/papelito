@@ -21,8 +21,6 @@ func handle_state_transitions():
 		%StateChart.send_event("to_crane")
 	elif input_buffer.any(func(entry): return entry.input.is_action("to_boat")):
 		%StateChart.send_event("to_boat")
-	if input_buffer.any(func(entry): return entry.input.is_action("to_dragon")):
-		%StateChart.send_event("to_dragon")
 		
 
 func _input(event):

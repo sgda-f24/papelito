@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Audio="*res://levels/ui/audio/audio.tscn"
 UI="*res://addons/PackedUi/UI/UI.tscn"
-Tracks="*res://levels/tracks/tracks.tscn"
 
 [display]
 
@@ -39,6 +39,10 @@ enabled=PackedStringArray("res://addons/PackedUi/plugin.cfg", "res://addons/godo
 [filesystem]
 
 import/blender/enabled=false
+
+[global_group]
+
+SimpleAudioManager=""
 
 [input]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://bd3dj73fu4rt6"]
+[gd_scene load_steps=18 format=4 uid="uid://bd3dj73fu4rt6"]
 
 [ext_resource type="Script" path="res://addons/PackedUi/Code/ui.gd" id="1_unh7l"]
 [ext_resource type="Theme" uid="uid://cpqt1hqsijy37" path="res://addons/PackedUi/default_theme.tres" id="2_fnkc2"]
@@ -15,32 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://4fmfjwd7xr7l" path="res://addons/PackedUi/popup_icon_warning.png" id="13_yi17b"]
 [ext_resource type="Script" path="res://addons/PackedUi/Code/main_menu.gd" id="14_05v4a"]
 [ext_resource type="PackedScene" uid="uid://b3l0i2y1tvj7b" path="res://levels/folding_map.tscn" id="15_ubrfx"]
-[ext_resource type="AudioStream" uid="uid://ds5xypbwpgq20" path="res://levels/tracks/sfx/Button Click.mp3" id="16_lg3h0"]
 [ext_resource type="TileSet" uid="uid://f8coxbxi2r70" path="res://entities/tiles/tiles_no_collision.tres" id="16_t4xcg"]
-
-[sub_resource type="Animation" id="Animation_vbvms"]
-resource_name = "button_pressed"
-length = 0.08
-tracks/0/type = "audio"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AudioStreamPlayer")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("16_lg3h0")
-}],
-"times": PackedFloat32Array(0)
-}
-tracks/0/use_blend = true
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_okx1b"]
-_data = {
-"button_pressed": SubResource("Animation_vbvms")
-}
+[ext_resource type="PackedScene" uid="uid://b15qrib0d1s2i" path="res://levels/ui/audio/audio.tscn" id="18_wgl15"]
 
 [node name="UI" type="CanvasLayer"]
 process_mode = 3
@@ -108,7 +84,6 @@ offset_right = 1280.0
 offset_bottom = 720.0
 script = ExtResource("4_o2pq1")
 menu_name = "[center]Settings[/center]"
-use_simple_audio_manager = false
 window_options = Array[String](["Windowed", "Borderless"])
 window_sizes = Array[Vector2i]([Vector2i(3840, 2160), Vector2i(2560, 1440), Vector2i(1920, 1080), Vector2i(1366, 768), Vector2i(1280, 720)])
 display_language_options = false
@@ -342,7 +317,6 @@ script = ExtResource("10_dj81m")
 id = "results"
 
 [node name="Popups" type="Control" parent="."]
-visible = false
 custom_minimum_size = Vector2(1280, 720)
 layout_mode = 3
 anchors_preset = 0
@@ -353,7 +327,6 @@ script = ExtResource("11_0v8bf")
 
 [node name="small_popup" type="PanelContainer" parent="Popups"]
 unique_name_in_owner = true
-visible = false
 clip_contents = true
 custom_minimum_size = Vector2(480, 150)
 layout_mode = 0
@@ -409,7 +382,6 @@ layout_mode = 2
 
 [node name="large_popup" type="Control" parent="Popups"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(1280, 720)
 anchors_preset = 0
 offset_right = 1280.0
@@ -524,6 +496,7 @@ script = ExtResource("14_05v4a")
 get_name_from_properties = true
 game_title = "Papelito"
 menu_options = Array[String](["Play", "Settings", "Credits"])
+background_color = null
 id = "main_menu"
 
 [node name="FoldingMap" parent="MainMenu" instance=ExtResource("15_ubrfx")]
@@ -578,17 +551,15 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="SimpleAudioManager" parent="." instance=ExtResource("18_wgl15")]
 unique_name_in_owner = true
-libraries = {
-"": SubResource("AnimationLibrary_okx1b")
-}
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="ButtonPressed" from="." to="." method="_on_button_pressed"]
 [connection signal="ButtonPressed" from="." to="MainMenu" method="_on_ui_button_pressed"]
+[connection signal="ButtonPressed" from="." to="SimpleAudioManager" method="_on_ui_button_pressed"]
+[connection signal="OptionUpdated" from="." to="SimpleAudioManager" method="_on_ui_option_updated"]
 [connection signal="TogglePauseGame" from="." to="PlayerUI" method="_on_ui_toggle_pause_game"]
 [connection signal="ToggleUi" from="." to="PlayerUI" method="_on_ui_toggle_ui"]
 [connection signal="ToggleUi" from="." to="MainMenu" method="_on_ui_toggle_ui"]
 [connection signal="WindowResized" from="." to="." method="_on_window_resized"]
+[connection signal="OptionsUpdated" from="OptionsMenu" to="SimpleAudioManager" method="_on_options_menu_options_updated"]

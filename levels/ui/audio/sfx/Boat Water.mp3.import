@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cxcbk15pl6l8k"
+path="res://.godot/imported/Boat Water.mp3-efdae877c9c1758d7c5478fb205e46d8.mp3str"
+
+[deps]
+
+source_file="res://levels/ui/audio/sfx/Boat Water.mp3"
+dest_files=["res://.godot/imported/Boat Water.mp3-efdae877c9c1758d7c5478fb205e46d8.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

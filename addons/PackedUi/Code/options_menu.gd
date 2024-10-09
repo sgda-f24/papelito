@@ -34,7 +34,7 @@ const DROP_DOWN_OPTION = preload("res://addons/PackedUi/UI/drop_down_option.tscn
 ## If TRUE, sound options will attempt to connect with the Simple Audio Manager.
 @export var use_simple_audio_manager:bool = true
 ## If use_simple_audio_manager is false, default value of each audio slider are set with this value. Clamped between 0.0 and 1.0.
-@export var default_audio_slider_value:float = 1.0:
+@export var default_audio_slider_value:float = 0.5:
 	get:
 		return clampf(default_audio_slider_value, 0.0, 1.0)
 
@@ -118,6 +118,7 @@ func _ready() -> void:
 	UI.OptionUpdated.connect(_update_game_language)
 	UI.OptionUpdated.connect(_update_audio_levels)
 	UI.PopupResult.connect(_popup_result)
+	
 	tab_container.get_tab_bar().set_tab_title(0,first_tab_name)
 	starting_window_option = _get_window_option()
 	current_window_option = starting_window_option

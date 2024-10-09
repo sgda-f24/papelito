@@ -38,7 +38,7 @@ func _ready() -> void:
 	height = ProjectSettings.get_setting("display/window/size/viewport_height")
 	await get_tree().create_timer(0.5).timeout
 
-	UI.ToggleUi.emit("main_menu", true, "")
+	UI.ToggleUi.emit("main_menu", true, "main_menu")
 
 
 func _physics_process(delta: float) -> void:
@@ -72,11 +72,3 @@ func _get_all_children(_parent:Node) -> Array:
 		if child.get_children().size() > 0:
 			children.append_array(_get_all_children(child))
 	return children
-
-
-func _on_window_resized(_value: Vector2i) -> void:
-	print(_value)
-
-
-func _on_button_pressed(id: String, from: String) -> void:
-	%AnimationPlayer.play("button_pressed")

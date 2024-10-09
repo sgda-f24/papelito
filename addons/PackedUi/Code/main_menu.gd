@@ -96,6 +96,5 @@ func button_pressed(_id:String) -> void:
 
 func _on_ui_toggle_ui(id: String, value: bool, previous: String) -> void:
 	if id == "main_menu":
-		get_tree().paused = false
-		Tracks.track_player.stop()
-		Tracks.track_player.play("title")
+		get_tree().paused = true
+		Audio.audio_player.play("title")

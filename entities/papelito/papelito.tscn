@@ -16,8 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://cogvf7mon03ti" path="res://entities/papelito/dragon/dragon.tscn" id="13_vkeew"]
 [ext_resource type="Shader" path="res://entities/papelito/kill.gdshader" id="15_lvkq4"]
 [ext_resource type="Texture2D" uid="uid://g0iau1j4dy58" path="res://entities/papelito/dash.png" id="16_5ytbo"]
-[ext_resource type="AudioStream" uid="uid://3tt86ak4qc7f" path="res://levels/tracks/sfx/Fold.mp3" id="17_yggcd"]
-[ext_resource type="AudioStream" uid="uid://das4005wf0rge" path="res://levels/tracks/sfx/Crane Wind.mp3" id="18_expw8"]
+[ext_resource type="AudioStream" uid="uid://3tt86ak4qc7f" path="res://levels/ui/audio/sfx/Fold.mp3" id="17_yggcd"]
+[ext_resource type="AudioStream" uid="uid://das4005wf0rge" path="res://levels/ui/audio/sfx/Crane Wind.mp3" id="18_expw8"]
 
 [sub_resource type="Resource" id="Resource_lnobj"]
 script = ExtResource("6_na5v8")
@@ -365,6 +365,7 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
 
 [connection signal="state_input" from="StateChart/Root" to="StateChart/Root/StateManager" method="_on_root_state_input"]
 [connection signal="state_entered" from="StateChart/Root/Unfolded" to="Unfolded" method="_on_unfolded_state_entered"]

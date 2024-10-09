@@ -2,6 +2,7 @@ class_name SliderOption extends OptionsOption
 
 @onready var name_label: Label = %name_label
 @onready var slider: HSlider = %slider
+@onready var audio: SimpleAudioManager
 
 var dragging:bool = false
 var dragging_timer:float = 0.0:
@@ -12,11 +13,11 @@ var dragging_timer:float = 0.0:
 			_update_value()
 var dragging_delay:float = 0.2
 var use_sam:bool = false
-var audio:Node
 
 func _ready() -> void:
 	slider.drag_ended.connect(_drag_ended)
 	slider.drag_started.connect(_start_dragging)
+	audio = get_tree().get_first_node_in_group("SimpleAudioManager") as SimpleAudioManager
 
 func _physics_process(delta: float) -> void:
 	if dragging:
@@ -24,18 +25,12 @@ func _physics_process(delta: float) -> void:
 
 
 func _update_value() -> void:
-	if use_sam and audio != null:
-		audio.BusVolumeUpdate.emit(id, slider.value)
-	else:
-		UI.OptionUpdated.emit(id, slider.value)
+	UI.OptionUpdated.emit(id, slider.value)
 
 
 func _drag_ended(_value_changed:bool) -> void:
 	if _value_changed:
-		if use_sam and audio != null:
-			audio.BusVolumeUpdate.emit(id, slider.value)
-		else:
-			UI.OptionUpdated.emit(id, slider.value)
+		UI.OptionUpdated.emit(id, slider.value)
 	if dragging:
 		dragging = false
 		
@@ -49,24 +44,23 @@ func _start_dragging():
 
 func set_slider(_name:String, _using_sam:bool, _slider_value:float = 1.0) -> float:
 	name = "bus_slider_"+_name
+	use_sam = _using_sam
 	id = _name
 	name_label.text = _name
-	if _using_sam:
-		use_sam = _using_sam
-		var audio = get_tree().get_first_node_in_group("SimpleAudioManager")
-		if audio != null:
-			match _name:
-				"Master":
-					slider.value = audio.DEFAULT.master_volume
-				"Music":
-					slider.value = audio.DEFAULT.music_volume
-				"SFX":
-					slider.value = audio.DEFAULT.sfx_volume
-				_:
-					pass
-	else:
-		slider.value = _slider_value
-
+	if audio != null:
+		match _name:
+			"Master":
+				slider.value = audio.master_volume
+				UI.OptionUpdated.emit(id, audio.master_volume)
+			"Music":
+				slider.value = audio.music_volume
+				UI.OptionUpdated.emit(id, audio.music_volume)
+			"SFX":
+				slider.value = audio.sfx_volume
+				UI.OptionUpdated.emit(id, audio.sfx_volume)
+			_:
+				pass
+	
 	return slider.value
 
 

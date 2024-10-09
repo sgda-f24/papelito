@@ -11,12 +11,13 @@ func _on_ui_toggle_pause_game(value: bool) -> void:
 	if value:
 		get_tree().paused = true
 		UI.ToggleUi.emit("pause", true, id)
+		Audio.audio_player.stop()
 	else:
 		get_tree().paused = false
+		Audio.audio_player.play("level1")
 
 
 func _on_ui_toggle_ui(_id: String, value: bool, previous: String) -> void:
-	Tracks.track_player.stop()
 	if _id == "play":
-		Tracks.track_player.play("level1")
+		Audio.audio_player.play("level1")
 		get_tree().paused = false

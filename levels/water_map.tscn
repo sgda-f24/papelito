@@ -1,12 +1,13 @@
-[gd_scene load_steps=5 format=4 uid="uid://cnlpph3r42kgo"]
+[gd_scene load_steps=6 format=4 uid="uid://cnlpph3r42kgo"]
 
 [ext_resource type="PackedScene" uid="uid://c8hrlwnukjmlj" path="res://entities/tiles/water/water_body.tscn" id="1_vlrw8"]
 [ext_resource type="PackedScene" uid="uid://b5a3qkeq5jrkc" path="res://entities/tiles/water/water_wave.tscn" id="2_iv8cd"]
+[ext_resource type="PackedScene" uid="uid://cs08gvvxk3xnp" path="res://entities/tiles/water/under_water.tscn" id="3_6a36v"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_rp5d7"]
 scenes/1/scene = ExtResource("1_vlrw8")
 scenes/2/scene = ExtResource("2_iv8cd")
-scenes/2/display_placeholder = ExtResource("2_iv8cd")
+scenes/4/scene = ExtResource("3_6a36v")
 
 [sub_resource type="TileSet" id="TileSet_aj8no"]
 tile_shape = 1
@@ -16,5 +17,5 @@ sources/4 = SubResource("TileSetScenesCollectionSource_rp5d7")
 [node name="Water" type="TileMapLayer"]
 position = Vector2(47.01, 0)
 scale = Vector2(0.51, 0.51)
-tile_map_data = PackedByteArray("AAD1/wYABAAAAAAAAQD2/wYABAAAAAAAAQD3/wYABAAAAAAAAQD4/wYABAAAAAAAAQD0/wUABAAAAAAAAgD1/wUABAAAAAAAAgD2/wUABAAAAAAAAgD3/wUABAAAAAAAAgD4/wUABAAAAAAAAgAAAAAABAAAAAAAAQABAAAABAAAAAAAAQAAAP//BAAAAAAAAgD/////BAAAAAAAAgABAP//BAAAAAAAAgA=")
+tile_map_data = PackedByteArray("AAD1/wYABAAAAAAAAQD2/wYABAAAAAAAAQD3/wYABAAAAAAAAQD4/wYABAAAAAAAAQD0/wUABAAAAAAAAgD1/wUABAAAAAAAAgD2/wUABAAAAAAAAgD3/wUABAAAAAAAAgD4/wUABAAAAAAAAgAAAAAABAAAAAAAAQABAAAABAAAAAAAAQAAAP//BAAAAAAAAgD/////BAAAAAAAAgABAP//BAAAAAAAAgAAAAEABAAAAAAABAABAAEABAAAAAAABAABAAIABAAAAAAABAD//wEABAAAAAAABAAAAAIABAAAAAAABAA=")
 tile_set = SubResource("TileSet_aj8no")

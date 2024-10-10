@@ -1,12 +1,20 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cunk4g7ai43eu"]
+[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://cunk4g7ai43eu"]
 
+[ext_resource type="Shader" uid="uid://4556cu3qfq58" path="res://levels/tile.tres" id="1_8ubib"]
 [ext_resource type="Texture2D" uid="uid://x7majcf1dcmx" path="res://entities/tiles/tiles.png" id="1_qdf4b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vdv64"]
+shader = ExtResource("1_8ubib")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_agsfw"]
+shader = ExtResource("1_8ubib")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ipgga"]
 texture = ExtResource("1_qdf4b")
 texture_region_size = Vector2i(512, 512)
 0:0/next_alternative_id = 5
 0:0/0 = 0
+0:0/0/material = SubResource("ShaderMaterial_vdv64")
 0:0/0/terrain_set = 0
 0:0/0/terrain = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -256, -256, 0, 0, 256, 256, 0)
@@ -45,6 +53,7 @@ texture_region_size = Vector2i(512, 512)
 0:0/4/custom_data_0 = 1
 1:0/next_alternative_id = 5
 1:0/0 = 0
+1:0/0/material = SubResource("ShaderMaterial_agsfw")
 1:0/0/terrain_set = 0
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 0, -256, 0, 0, 256, 256, 0)
 1:0/0/terrains_peering_bit/bottom_right_side = 0

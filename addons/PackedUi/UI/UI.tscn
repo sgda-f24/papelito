@@ -76,6 +76,7 @@ theme = ExtResource("2_fnkc2")
 text = "checkpoint = r"
 
 [node name="OptionsMenu" type="Control" parent="." groups=["OptionsMenu"]]
+visible = false
 custom_minimum_size = Vector2(1280, 720)
 layout_mode = 3
 anchors_preset = 0
@@ -487,7 +488,6 @@ text = "Confirm
 "
 
 [node name="MainMenu" type="Control" parent="." groups=["Credits", "MainMenu", "OptionsMenu", "PauseMenu", "PlayerUI", "ResultScreen"]]
-visible = false
 custom_minimum_size = Vector2(1280, 720)
 layout_mode = 3
 anchors_preset = 0

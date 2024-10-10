@@ -230,7 +230,7 @@ _data = {
 "title": SubResource("Animation_3eymw")
 }
 
-[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_u4oy0"]
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_i5avw"]
 
 [node name="SimpleAudioManager" type="Node" groups=["SimpleAudioManager"]]
 process_mode = 3
@@ -247,5 +247,5 @@ libraries = {
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = SubResource("AudioStreamPolyphonic_u4oy0")
+stream = SubResource("AudioStreamPolyphonic_i5avw")
 volume_db = -34.298

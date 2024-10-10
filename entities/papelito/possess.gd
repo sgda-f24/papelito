@@ -93,19 +93,11 @@ func un_possess():
 func did_input(action: StringName) -> bool:
 	return state_manager.input_buffer.any(func(entry): return entry.input.is_action(action));
 
-func cast_to_floor(max_distance: float = 500.0) -> bool:
-	var collider = get_collider()
-	var query = PhysicsShapeQueryParameters2D.new()
-	query.set_shape(collider.shape)
-	query.set_motion(Vector2.DOWN * max_distance)
-	query.set_exclude([self])
-	var space_state = get_world_2d().direct_space_state
-	var result = space_state.cast_motion(query)
-	result.sort()
-	self.position += (1-result[0])*Vector2.DOWN*max_distance - Vector2.DOWN*(collider.shape as CapsuleShape2D).height
+func cast_to_floor() -> bool:
+	var capsule = get_collider().shape as CapsuleShape2D
+	print(%CastToFloor.get_collision_point())
 	return true
-
-# Helper Function to Get CollisionShape2D
+	
 func get_collider() -> CollisionShape2D:
 	for child in get_children():
 		if child is CollisionShape2D:

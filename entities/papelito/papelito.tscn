@@ -354,6 +354,10 @@ unique_name_in_owner = true
 water_speed = 2000
 speed = 100.0
 
+[node name="CastToFloor" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+target_position = Vector2(0, 1024)
+
 [node name="Folding" parent="." instance=ExtResource("10_q2wum")]
 unique_name_in_owner = true
 visible = false

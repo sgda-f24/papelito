@@ -5,11 +5,11 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wn5q1"]
 shader = ExtResource("1_sxvbv")
-shader_parameter/wave_amplitude = 5.0
-shader_parameter/wave_frequency = 1.0
-shader_parameter/wave_speed = 5.0
+shader_parameter/wave_amplitude = 16.221
+shader_parameter/wave_frequency = 1.576
+shader_parameter/wave_speed = 2.682
 shader_parameter/upper_limit = 100.0
-shader_parameter/frag_wave_speed = 3.0
+shader_parameter/frag_wave_speed = 10.0
 shader_parameter/frag_wave_frequency = 10.0
 shader_parameter/frag_wave_width = 1.0
 shader_parameter/transparency = 0.5
@@ -27,4 +27,5 @@ collision_layer = 4
 collision_mask = 4
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+visible = false
 polygon = PackedVector2Array(0, 256, 192, 64, -192, 64)

@@ -1,25 +1,21 @@
 extends Possess
 
-@export var glide: float = 0.01
+@export var glide: float = 0.1
 @export var glide_velocity: float = 300
-
-@export var jump_velocity = Vector2.ZERO
 
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	
 	# Add the gravity.
 	if not is_on_floor():
-		if Input.is_action_pressed("jump"):
+		if Input.is_action_pressed("jump") and velocity.y > 0:
 			velocity += get_gravity()*glide * delta
 		else:
-			velocity += get_gravity() * delta
+			velocity += get_gravity()*delta
 
 	# Handle jump.
 	if Input.is_action_pressed("jump") and is_on_floor():
-		%AnimationPlayer.play("zero_jump")
-		
-	velocity += jump_velocity
+		velocity.y = jump
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.

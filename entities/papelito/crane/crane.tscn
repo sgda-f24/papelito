@@ -46,7 +46,6 @@ _data = {
 [node name="Crane" type="CharacterBody2D"]
 collision_layer = 3
 script = ExtResource("1_7amdb")
-glide = 0.4
 glide_velocity = 500.0
 jump = -1000.0
 

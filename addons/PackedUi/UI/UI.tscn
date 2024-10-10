@@ -76,7 +76,6 @@ theme = ExtResource("2_fnkc2")
 text = "checkpoint = r"
 
 [node name="OptionsMenu" type="Control" parent="." groups=["OptionsMenu"]]
-visible = false
 custom_minimum_size = Vector2(1280, 720)
 layout_mode = 3
 anchors_preset = 0
@@ -84,7 +83,7 @@ offset_right = 1280.0
 offset_bottom = 720.0
 script = ExtResource("4_o2pq1")
 menu_name = "[center]Settings[/center]"
-window_options = Array[String](["Windowed", "Borderless"])
+display_display_options = false
 window_sizes = Array[Vector2i]([Vector2i(3840, 2160), Vector2i(2560, 1440), Vector2i(1920, 1080), Vector2i(1366, 768), Vector2i(1280, 720)])
 display_language_options = false
 id = "settings"
@@ -317,6 +316,7 @@ script = ExtResource("10_dj81m")
 id = "results"
 
 [node name="Popups" type="Control" parent="."]
+visible = false
 custom_minimum_size = Vector2(1280, 720)
 layout_mode = 3
 anchors_preset = 0
@@ -487,6 +487,7 @@ text = "Confirm
 "
 
 [node name="MainMenu" type="Control" parent="." groups=["Credits", "MainMenu", "OptionsMenu", "PauseMenu", "PlayerUI", "ResultScreen"]]
+visible = false
 custom_minimum_size = Vector2(1280, 720)
 layout_mode = 3
 anchors_preset = 0

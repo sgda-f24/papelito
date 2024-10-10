@@ -32,6 +32,7 @@ func _process(_delta: float) -> void:
 			# Connect the signal before pausing
 			instance.connect("folding_finished", _on_folding_finished)
 			get_tree().paused = true
+			%AnimationPlayer.play("kill")
 
 func _on_folding_finished():
 	update_loc()
@@ -48,6 +49,9 @@ func _on_player_killed():
 		# Connect the signal before pausing
 		instance.connect("folding_finished", _on_folding_finished)
 		get_tree().paused = true
+		cast_to_floor()
+		%AnimationPlayer.play("RESET")
+		%AnimationPlayer.play("kill")
 
 func _physics_process(delta: float) -> void:
 	if get_last_slide_collision():
@@ -98,7 +102,7 @@ func cast_to_floor(max_distance: float = 500.0) -> bool:
 	var space_state = get_world_2d().direct_space_state
 	var result = space_state.cast_motion(query)
 	result.sort()
-	self.position += result[0]*Vector2.DOWN*max_distance - Vector2.DOWN*(collider.shape as CapsuleShape2D).height
+	self.position += (1-result[0])*Vector2.DOWN*max_distance - Vector2.DOWN*(collider.shape as CapsuleShape2D).height
 	return true
 
 # Helper Function to Get CollisionShape2D

@@ -262,6 +262,7 @@ func _update_window_option(_id:String, _value:WindowOption, is_user_change:bool 
 
 func _update_window_size_option(_id:String, _value:int, _popup:bool = true) -> void:
 	if _id == "window_size_options" and _value:
+		
 		DisplayServer.window_set_size(window_sizes[_value])
 		new_window_size = window_sizes[_value]
 		if _popup:

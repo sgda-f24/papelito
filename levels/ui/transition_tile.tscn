@@ -6,9 +6,9 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ivhet"]
 shader = ExtResource("1_ifemj")
-shader_parameter/fold_amount = 0.0
-shader_parameter/end_color = Color(0.585062, 0.585062, 0.585062, 1)
-shader_parameter/boundary_color = Color(1, 1, 1, 1)
+shader_parameter/fold_amount = 1.0
+shader_parameter/end_color = Color(0.596078, 0.733333, 0.909804, 1)
+shader_parameter/boundary_color = Color(0.324203, 0.324203, 0.324203, 1)
 shader_parameter/max_boundary_width = 0.02
 
 [node name="TransitionTile" type="Polygon2D"]

@@ -132,7 +132,7 @@ func _hide_small_popup():
 # 		Reaching 0 closes and considers the popup canceled for the UI.PopupResult signal.
 func _display_big_popup(_severity:Severity, _title:String, _text:String, _id:String, _icon:Texture2D = null, _timer:int = 0) -> void:
 	large_popup_id = _id
-	
+	print(_severity, " ", _id)
 	match _severity:
 		Severity.WARNING:
 			icon_container_large.show()
@@ -201,6 +201,7 @@ func _cancel_btn_pressed() -> void:
 		large_popup_timed = false
 
 	UI.PopupResult.emit(large_popup_id, false)
+	print(large_popup_id)
 	_close_large_popup()
 
 
